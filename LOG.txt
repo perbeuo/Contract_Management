@@ -6,3 +6,5 @@ Create the java EE project based on the web.
 Add the tomcat server to the project
 2017.6.4
 The base class  of the contrac information
+2017.6.4
+The utils of the contract.
