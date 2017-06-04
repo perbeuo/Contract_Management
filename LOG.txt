@@ -4,3 +4,5 @@ Use the html and css to create the goal.
 2017.5.27
 Create the java EE project based on the web.
 Add the tomcat server to the project
+2017.6.4
+The base class  of the contrac information
