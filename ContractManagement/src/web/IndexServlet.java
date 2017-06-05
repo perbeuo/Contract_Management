@@ -17,7 +17,7 @@ public class IndexServlet extends HttpServlet {
   			throws ServletException, IOException {
   		response.setContentType("text/html");// Set the types of output content 
   		response.setCharacterEncoding("UTF-8");// Set the character encoding of output content 
-  		PrintWriter out = response.getWriter();// Get the output object
+  		PrintWriter out = response.getWriter();// Get the output object.
   		// Output the <!DOCTYPE> declaration
   		out.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
   		// Output the standard HTML structure
