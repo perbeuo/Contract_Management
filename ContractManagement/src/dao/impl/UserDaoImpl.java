@@ -89,4 +89,48 @@ public class UserDaoImpl implements UserDao {
 		}
 		return flag;
 	}
+	
+	/**
+	 * Query user id according to the user name and password
+	 * 
+	 * @param name 
+	 * @param password 
+	 * @return User id
+	 * @throws AppException
+	 */
+	public int login(String name, String password) throws AppException {
+		int userId = -1; // Initialize the user id
+		//Declare Connection object,PreparedStatement object and ResultSet object
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		try {
+			// Create database connection
+			conn = DBUtil.getConnection();
+			// Declare operation statement:query user id according to the user name and password , "?" is a placeholder
+			String sql = "select id from t_user where name = ? and password = ? and del = 0";
+			// pre-compiled sql
+			psmt = conn.prepareStatement(sql);
+			// Set values for the placeholder
+			psmt.setString(1, name);
+			psmt.setString(2, password);
+			// Execute the query operation
+			rs = psmt.executeQuery();
+			// Query record and extract the user id
+			if (rs.next()) {
+				userId = rs.getInt("id");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException("dao.impl.UserDaoImpl.login error");
+		} finally {
+			// Close the database operation object, release resources
+			DBUtil.closeResultSet(rs);
+			DBUtil.closeStatement(psmt);
+			DBUtil.closeConnection(conn);
+		}
+		return userId;
+	}
 }

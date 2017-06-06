@@ -7,14 +7,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * Process user's request, output the target page
+ * Process user's request,output new user page
  */
-public class ToRegisterServlet extends HttpServlet {
+public class ToNewUserServlet extends HttpServlet {
 
 	/**
-	 * Process the POST requests, output the target page
+	 * Process the POST requests,output new user page
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -23,7 +24,7 @@ public class ToRegisterServlet extends HttpServlet {
 	}
 
 	/**
-	 * Process the GET requests, output the target page
+	 * Process the GET requests,output new user page
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -37,23 +38,33 @@ public class ToRegisterServlet extends HttpServlet {
 		out.println("<head>\r\n");
 		// Set the character encoding for the HTML document
 		out.println("<meta http-equiv='Content-Type' content='text/html' charset='utf-8' />\r\n");
-		out.println("<title>Registration pag</title>\r\n");
+		out.println("<title>New user page</title>\r\n");
 		out.println("</head>\r\n");
 		out.println("<body>\r\n");
-		out.println("<form action=\"register\" method=\"post\">\r\n");//form
-		out.println("&nbsp;&nbsp;&nbsp;User &nbsp; name:<input type=\"text\" name=\"name\" /> <br />\r\n");
-		out.println("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password:<input type=\"password\" name=\"password\" /> <br />\r\n");
-		out.println("Repeat password:<input type=\"password\" name=\"password2\" /> <br />\r\n");
 		out.println("<br />\r\n");
-		// Output message
-		if (request.getAttribute("message") != null) {
-			out.print("<font color=\"red\"> ");
-		    out.print(request.getAttribute("message"));
-		    out.print("</font> <br />\r\n");
+		
+		// Declare session
+		HttpSession session = null;
+		// Get session by using request object
+		session = request.getSession();
+		/*
+		 * User login verification,show welcome information if already login,and provide "logout" link
+		 *  Otherwise redirect to login page
+		 */
+		if (session.getAttribute("userName") != null) {
+			// If user is already login,output welcome information and user information
+			out.println("Hello!");
+		    out.print(session.getAttribute("userName"));
 		    out.println("<br />\r\n");
+		    out.println("You hava no contract operation privileges, please waiting for the administrator configure permissions for you\r\n");
+		    out.println("<br />\r\n");
+		    //  Output "logout" link
+		    out.println("<br />\r\n");
+		    out.println("<a href=\"logout\">Logout</>\r\n");
+		} else {
+			// User is not login, redirect to login page
+			response.sendRedirect("toLogin");
 		}
-		out.println("<input type=\"submit\" value=\"Submit\" /> <br />\r\n");
-		out.println("</form>\r\n");
 		out.println("</body>\r\n");
 		out.println("</html>\r\n");
 		// Clear and close the output stream

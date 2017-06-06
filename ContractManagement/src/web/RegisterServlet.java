@@ -47,9 +47,11 @@ public class RegisterServlet extends HttpServlet {
 		if(name == "" || password == "" || password2 == ""){
 			System.out.println("Entered incorrectly! ---");
 			System.out.println("User name, password, and the repeated password can not be empty!");
+			message = "User name, password, and the repeat password can not be empty!";	
 		} else if(!password2.equals(password)){
 			System.out.println("Entered incorrectly!---");
 			System.out.println("Repeated password and password should keep consistent!");
+			message = "Repeat password and password should keep consistent!";
 		} else {
 			try {
 				// Encapsulate the user information to object of user entity class object User 
