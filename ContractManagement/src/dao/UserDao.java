@@ -27,4 +27,12 @@ public interface UserDao {
 	 */
 	public boolean add(User user) throws AppException;
 	
+	/**
+	 * Query user id according to the user name and password
+	 * @param name 
+	 * @param password 
+	 * @return User id
+	 * @throws AppException 
+	 */
+	public int login(String name,String password) throws AppException;
 }

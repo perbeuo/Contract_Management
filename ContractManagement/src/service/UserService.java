@@ -37,24 +37,43 @@ public class UserService {
 		}
 		return flag;
 	}
+	
+	/**
+	 * User login
+	 * 
+	 * @param name 
+	 * @param password 
+	 * @return Query the matched user number according to the condition , otherwise it returns 0
+	 * @throws AppException
+	 */
+	public int login(String name, String password) throws AppException {
+		int userId = -1; // Declare userId
+		try {
+			// Get userId
+			userId = userDao.login(name, password); 
+		} catch (AppException e) {
+			e.printStackTrace();
+			throw new AppException("service.UserService.login");
+		}
+		//  Return userId
+		return userId;
+	}
 	/**
 	 * 
 	 * test the function just added
 	 */
-/*	public static void main(String[] args) {
+	public static void main(String[] args) {
 		//Instantiate the object of entity class User 
 		User user = new User();
 		// Initialize the user business logic class
 		UserService userService = new UserService();
-		boolean flag = false;
-		user.setName("test");
-		user.setPassword("testpass");
+		int id = -1;
 		try {
-			flag = userService.register(user);
-			System.out.println(flag);
+			id = userService.login("test", "testpass");
+			System.out.println(id);
 		} catch (AppException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}*/
+	}
 }
