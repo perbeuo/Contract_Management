@@ -28,60 +28,37 @@ public class LoginServlet extends HttpServlet {
 
 		// Initialize prompt message
 		String message = "";
-
-		/*
-		 * Process login request, verify the following: user name and password can not be empty.
-		 * 
-		 * If do not meet the above requirements, so login fails, give prompt message.
-		 */
-		if (name == "" || password == "") {
-			System.out.println("---Entered incorrectly!---");
-			System.out.println("User name and password can not be empty!");
-			message = "User name and password can not be empty!";
-			// Save message into request
-			request.setAttribute("message", message);
-			// Forward to the login page
-			request.getRequestDispatcher("toLogin").forward(request, response);
-		} else {
-			/*
-			 * Process login, query user id based on user name and password,login here is using hard-coded validation 
-			 * Returns the value of user id  after a successful login.
-			 */
-			//Initialize userId, it used to receive the user id that processing login
-			int userId = -1;
-			try { 
-				// Initialize  user business logic class
-				UserService userService = new UserService();
-				// Call business logic layer to query userId
-				userId = userService.login(name, password);
-
-				if (userId > 0) { // Login successfully
-					// Declare  session
-					HttpSession session = null;
-					// Get session by using request 
-					session = request.getSession();
-					// Save userId and user name into session
-					session.setAttribute("userId", userId);
-					session.setAttribute("userName", name);
-					// Redirect to the new user page
-					response.sendRedirect("toNewUser");
-				} else { // If login failed, jump to login page and display prompt message.
-					message = "Incorrect user name or password!";
-					// Save message into request
-					request.setAttribute("message", message);
-					//Transfer login user name to page for display
-					request.setAttribute("userName", name);
-
-					// Forward to login page
-					request.getRequestDispatcher("toLogin").forward(request,
-							response);
-				}
-			}catch (AppException e) {
-				e.printStackTrace();
-				// Redirect to the exception page
-				response.sendRedirect("toError");
+		
+		int userId = -1;
+		try {
+			// Initialize the user business logic class
+			UserService userService = new UserService();
+			// Call business logic layer for user login
+			userId = userService.login(name, password);
+			if (userId > 0) { // Login successfully  
+				// Declare session
+				HttpSession session = null;
+				// Get session by using request
+				session = request.getSession();
+				// Save userId and user name into session
+				session.setAttribute("userId", userId);
+				session.setAttribute("userName", name);
+				// Redirect to new user page
+				response.sendRedirect("toNewUser");
+			} else {// Login failed
+				// Set prompt message
+				message = "Incorrect user name or password!";
+				request.setAttribute("message", message); // Save prompt message into request
+				// Forward to login page
+				request.getRequestDispatcher("/login.jsp").forward(request,
+						response);
 			}
+		} catch (AppException e) {
+			e.printStackTrace();
+			// Redirect to exception page
+			response.sendRedirect("toError");
 		}
+		
 	}
 
 	/**
