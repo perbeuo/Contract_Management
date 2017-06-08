@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Role;
 import service.UserService;
 import utils.AppException;
 /**
@@ -43,12 +44,27 @@ public class LoginServlet extends HttpServlet {
 				// Save userId and user name into session
 				session.setAttribute("userId", userId);
 				session.setAttribute("userName", name);
-				// Redirect to new user page
-				response.sendRedirect("toNewUser");
+				// Declare role
+				Role role = null;
+				//Call business logic layer to get role's information
+				role = userService.getUserRole(userId);
+				// Process page jump according to the user's role
+				if ( role == null) {
+					//Redirect to new user page
+					response.sendRedirect("toNewUser");
+				} else if (role.getName().equals("admin")) {
+					//Redirect to administrator page
+					response.sendRedirect("toAdmin");
+				} else if (role.getName().equals("operator")) {
+					//Redirect to operator page 
+					response.sendRedirect("toOperator");
+				}
 			} else {// Login failed
 				// Set prompt message
 				message = "Incorrect user name or password!";
 				request.setAttribute("message", message); // Save prompt message into request
+				// Save user name into request
+				request.setAttribute("userName", name);	
 				// Forward to login page
 				request.getRequestDispatcher("/login.jsp").forward(request,
 						response);

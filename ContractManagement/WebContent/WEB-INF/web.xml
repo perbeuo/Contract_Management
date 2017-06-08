@@ -117,4 +117,24 @@
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
 
+<!-- Configure the access of ToAdminServlet-->
+	<servlet>
+		<servlet-name>toAdmin</servlet-name>
+		<servlet-class>web.ToAdminServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toAdmin</servlet-name>
+		<url-pattern>/toAdmin</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ToOperatorServlet-->
+	<servlet>
+		<servlet-name>toOperator</servlet-name>
+		<servlet-class>web.ToOperatorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toOperator</servlet-name>
+		<url-pattern>/toOperator</url-pattern>
+	</servlet-mapping>
+
 </web-app>

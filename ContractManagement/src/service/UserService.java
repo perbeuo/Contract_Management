@@ -1,9 +1,10 @@
 package service;
 
 import model.User;
+import model.Role;
 import utils.AppException;
-import dao.UserDao;
-import dao.impl.UserDaoImpl;;
+import dao.*;
+import dao.impl.*;
 
 /**
  * User business logic class
@@ -11,12 +12,16 @@ import dao.impl.UserDaoImpl;;
 public class UserService {
 	
 	private UserDao userDao = null;// Define a userDao interface object
+	private RoleDao roleDao = null;// Define a roleDao interface object
+	private RightDao rightDao = null;// Define a userDao rightDao object
 
 	/**
 	 * No-arg constructor method is used to initialize userDao instance
 	 */
 	public UserService() {
 		userDao = new UserDaoImpl();
+		roleDao = new RoleDaoImpl();
+		rightDao = new RightDaoImpl();
 	}
 	
 	/**
@@ -75,5 +80,29 @@ public class UserService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Get the role information that corresponding to the user
+	 * 
+	 * @param userId 
+	 * @return Role object
+	 * @throws AppException
+	 */
+	public Role getUserRole(int userId) throws AppException {	
+		Role role = null;// Declare role
+		int roleId = -1; // Initialize  roleId
+		try {
+			//  Get the roleId that corresponding to the user
+			roleId = rightDao.getRoleIdByUserId(userId);
+			if(roleId > 0){
+				// Get role information
+				role = roleDao.getById(roleId); 
+			}
+		} catch (AppException e) {
+			e.printStackTrace();
+			throw new AppException("service.UserService.getUserRole");
+		}
+		return role;
 	}
 }
