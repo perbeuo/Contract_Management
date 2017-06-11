@@ -63,10 +63,7 @@ public class UserService {
 		//  Return userId
 		return userId;
 	}
-	/**
-	 * 
-	 * test the function just added
-	 */
+  
 	public static void main(String[] args) {
 		//Instantiate the object of entity class User 
 		User user = new User();
