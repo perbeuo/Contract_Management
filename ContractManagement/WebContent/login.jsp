@@ -22,6 +22,12 @@
 				}
 			}
 		</script>	
+		<script type="text/javascript">  
+ 			// Make the page as the parent window display
+ 			if(top!=self){
+ 				top.location.href=self.location.href;
+ 			}  
+  		</script>
 	</head>
 
 	<body>
