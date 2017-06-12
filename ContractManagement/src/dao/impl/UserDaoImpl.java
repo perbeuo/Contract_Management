@@ -133,4 +133,51 @@ public class UserDaoImpl implements UserDao {
 		}
 		return userId;
 	}
+	/**
+	 * Query user information according to id
+	 * 
+	 * @param id User id
+	 * @return User User object
+	 * @throws AppException
+	 */
+	public User getById(int id) throws AppException {
+		// Declare user object
+		User user = null;
+		//Declare Connection object,PreparedStatement object and ResultSet object
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		try {
+			// Create database connection
+			conn = DBUtil.getConnection();
+			// Declare operation statement:query user information according to the user id , "?" is a placeholder
+			String sql = "select id,name,password "
+					+"from t_user "
+					+"where id = ? and del = 0";
+			// pre-compiled sql
+			psmt = conn.prepareStatement(sql);
+			// Set values for the placeholder
+			psmt.setInt(1, id);
+			// Query resultSet
+			rs = psmt.executeQuery();
+			
+			// Save user information in Pole entity object when queried out resultSet
+			if (rs.next()) {
+				user = new User(); // Instantiate user objects
+				// Set value to user object
+				user.setId(rs.getInt("id"));
+				user.setName(rs.getString("name"));
+				user.setPassword(rs.getString("password"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException("com.ruanko.dao.impl.UserDaoImpl.getById");
+		} finally {
+			// Close the database operation object, release resources
+			DBUtil.closeResultSet(rs);
+			DBUtil.closeStatement(psmt);
+			DBUtil.closeConnection(conn);
+		}
+		return user;
+	}
 }

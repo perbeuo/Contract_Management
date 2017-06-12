@@ -1,15 +1,16 @@
-﻿<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Contract Management System - Login page</title>
+		<title>Contract Management System - Registration page</title>
 		<link href="css/style.css" rel="stylesheet" media="screen"
 			type="text/css" />
 		<script type="text/javascript">
 			function check(){
 				var name = document.getElementById('name');
 				var password = document.getElementById('password');
+				var password2 = document.getElementById('password2');
 				if(name.value == ""){
 					alert("User name can not be empty!");
 					name.focus();
@@ -20,14 +21,12 @@
 					password.focus();
 					return false;
 				}
+				if(password2.value != password.value){
+					alert("Repeat password and password should keep consistent!");
+					return false;
+				}
 			}
 		</script>	
-		<script type="text/javascript">  
- 			// Make the page as the parent window display
- 			if(top!=self){
- 				top.location.href=self.location.href;
- 			}  
-  		</script>
 	</head>
 
 	<body>
@@ -37,44 +36,58 @@
 
 		<!-- main start -->
 		<div class="main">
-			<form action="login" method="post">
+			<form action="register" method="post">
 
 				<div class="register_main">
 					<table>
 						<tr>
-							<td class="title" colspan="3">
-								User Login
+							<td class="title" colspan="2">
+								User register
 							</td>
 						</tr>
 						<tr>
-							<td width="60">
+							<td width="120" align="center">
 								User name:
 							</td>
-							<!-- Get user name-->
-							<%
-								// Set the name's default value is "",to avoid the page display null.
-								String name = "";
-								if (request.getAttribute("userName") != null) {
-									name = (String) request.getAttribute("userName");
-								}
-							%>
-							<td width="200">
-								<input type="text" name="name" id="name" value="<%=name%>" height="40"/>
+							<td>
+								<input type="text" name="name" id="name" value="" />
 							</td>
-							<td width="200"></td>
+						</tr>
+						<tr>
+							<td class="info" colspan="2">
+								User name must begin with a letter, at least four words(letters, Numbers, underscores).
+							</td>
 						</tr>
 
 						<tr>
-							<td>
-								Password：
+							<td align="center">
+								Password:
 							</td>
 							<td>
 								<input type="password" name="password" id="password" value="" />
 							</td>
-							<td></td>
 						</tr>
 						<tr>
-							<td colspan="3" align="left" style="color:red;">
+							<td class="info" colspan="2">
+								Password can not be too simple, at least contain six words; Recommend to use numbers and letters mixed arrangement, case-insensitive.
+							</td>
+						</tr>
+
+						<tr>
+							<td align="center">
+								Repeat Password:
+							</td>
+							<td>
+								<input type="password" name="password2" id="password2" value="" />
+							</td>
+						</tr>
+						<tr>
+							<td class="info" colspan="2">
+								Repeat password and password should keep consistent!
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="left" style="color:red;">
 							<%
 								if (request.getAttribute("message") != null) {
 							%>
@@ -85,8 +98,8 @@
 							</td>
 						</tr>
 						<tr>
-							<td colspan="3">
-								<input type="submit" value="Login" class="button" onclick="return check()"/>
+							<td colspan="2">
+								<input type="submit" value="Submit" class="button" onclick="return check()"/>
 							</td>
 						</tr>
 					</table>
