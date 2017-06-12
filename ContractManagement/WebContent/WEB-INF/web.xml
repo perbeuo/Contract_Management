@@ -136,5 +136,94 @@
 		<servlet-name>toOperator</servlet-name>
 		<url-pattern>/toOperator</url-pattern>
 	</servlet-mapping>
-
+	
+	<!-- Configure the access of ToDraftServlet -->
+	<servlet>
+		<servlet-name>toDraft</servlet-name>
+		<servlet-class>web.ToDraftServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toDraft</servlet-name>
+		<url-pattern>/toDraft</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of DraftServlet -->
+	<servlet>
+		<servlet-name>draft</servlet-name>
+		<servlet-class>web.DraftServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>draft</servlet-name>
+		<url-pattern>/draft</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ToDfphtListServlet -->
+	<servlet>
+		<servlet-name>toDfphtList</servlet-name>
+		<servlet-class>web.ToDfphtListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toDfphtList</servlet-name>
+		<url-pattern>/toDfphtList</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ToAssignOperServlet-->
+	<servlet>
+		<servlet-name>toAssignOper</servlet-name>
+		<servlet-class>web.ToAssignOperServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toAssignOper</servlet-name>
+		<url-pattern>/toAssignOper</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of AssignOperServlet-->
+	<servlet>
+		<servlet-name>assignOper</servlet-name>
+		<servlet-class>web.AssignOperServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>assignOper</servlet-name>
+		<url-pattern>/assignOper</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ToDhqhtListServlet -->
+	<servlet>
+		<servlet-name>toDhqhtList</servlet-name>
+		<servlet-class>web.ToDhqhtListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toDhqhtList</servlet-name>
+		<url-pattern>/toDhqhtList</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ToAddHQOpinionServlet  -->
+	<servlet>
+		<servlet-name>toAddHQOpinion</servlet-name>
+		<servlet-class>web.ToAddHQOpinionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toAddHQOpinion</servlet-name>
+		<url-pattern>/toAddHQOpinion</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of AddHQOpinionServlet  -->
+	<servlet>
+		<servlet-name>addHQOpinion</servlet-name>
+		<servlet-class>web.AddHQOpinionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>addHQOpinion</servlet-name>
+		<url-pattern>/addHQOpinion</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ContractDetailServlet  -->
+	<servlet>
+		<servlet-name>contractDetail</servlet-name>
+		<servlet-class>web.ContractDetailServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>contractDetail</servlet-name>
+		<url-pattern>/contractDetail</url-pattern>
+	</servlet-mapping>
 </web-app>

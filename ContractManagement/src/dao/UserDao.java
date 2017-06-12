@@ -35,4 +35,13 @@ public interface UserDao {
 	 * @throws AppException 
 	 */
 	public int login(String name,String password) throws AppException;
+	
+	/**
+	 * Query user's information according to id
+	 * 
+	 * @param id  User id
+	 * @return User 
+	 * @throws AppException
+	 */
+	public User getById(int id) throws AppException;
 }
