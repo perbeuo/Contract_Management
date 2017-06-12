@@ -35,6 +35,7 @@ public interface UserDao {
 	 * @throws AppException 
 	 */
 	public int login(String name,String password) throws AppException;
+	
 	/**
 	 * Query user's information according to id
 	 * 

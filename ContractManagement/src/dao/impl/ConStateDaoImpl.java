@@ -20,13 +20,13 @@ public class ConStateDaoImpl implements ConStateDao {
 	/**
 	 * Add contract operation state information
 	 *  
-	 * @param  conState Contract status object
+	 * @param  conState Contract state object
 	 * @return boolean Return true if successful , otherwise false
 	 * @throws AppException
 	 */
 	public boolean add(ConState conState) throws AppException{	
 		boolean flag = false;// Operation flag
-		//Declare Connection object,PreparedStatement object and ResultSet object
+		//Declare Connection object,PreparedStatement object
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		
@@ -37,7 +37,7 @@ public class ConStateDaoImpl implements ConStateDao {
 			String sql = "insert into t_contract_state(con_id,type) values(?,?)";
 				
 			psmt = conn.prepareStatement(sql);// Pre-compiled sql
-			// Set value for the placeholder 
+			// Set values for the placeholder 
 			psmt.setInt(1, conState.getConId());
 			psmt.setInt(2, conState.getType());
 		
@@ -49,7 +49,7 @@ public class ConStateDaoImpl implements ConStateDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new AppException(
-			"dao.impl.ContStateDaoImpl.add");
+			"dao.impl.ConStateDaoImpl.add");
 		} finally {
 			// Close the database operation object, release resources
 			DBUtil.closeStatement(psmt);
@@ -57,7 +57,7 @@ public class ConStateDaoImpl implements ConStateDao {
 		}
 		return flag;
 	}
-
+	
 	/**
 	 * Query contract id set that meet the conditions according to contract type
 	 * 
@@ -94,7 +94,7 @@ public class ConStateDaoImpl implements ConStateDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new AppException(
-			"dao.impl.ConStateDaoImpl.getConIdsByType");
+			"com.ruanko.dao.impl.ConStateDaoImpl.getConIdsByType");
 		} finally {
 			// Close database object operation, release resources
 			DBUtil.closeResultSet(rs);

@@ -17,6 +17,7 @@ public interface RightDao {
 	 * @throws AppException
 	 */
 	public int getRoleIdByUserId(int userId) throws AppException;
+
 	/**
 	 * Query user id set according to role id
 	 * 

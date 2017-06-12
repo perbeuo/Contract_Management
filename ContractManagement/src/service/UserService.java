@@ -1,12 +1,10 @@
 package service;
 
+import java.util.ArrayList;
+import java.util.List;
 import model.User;
 import model.Role;
 import utils.AppException;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import dao.*;
 import dao.impl.*;
 
@@ -67,7 +65,10 @@ public class UserService {
 		//  Return userId
 		return userId;
 	}
-  
+	/**
+	 * 
+	 * test the function just added
+	 */
 	public static void main(String[] args) {
 		//Instantiate the object of entity class User 
 		User user = new User();
@@ -81,6 +82,30 @@ public class UserService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Get the role information that corresponding to the user
+	 * 
+	 * @param userId 
+	 * @return Role object
+	 * @throws AppException
+	 */
+	public Role getUserRole(int userId) throws AppException {	
+		Role role = null;// Declare role
+		int roleId = -1; // Initialize  roleId
+		try {
+			//  Get the roleId that corresponding to the user
+			roleId = rightDao.getRoleIdByUserId(userId);
+			if(roleId > 0){
+				// Get role information
+				role = roleDao.getById(roleId); 
+			}
+		} catch (AppException e) {
+			e.printStackTrace();
+			throw new AppException("service.UserService.getUserRole");
+		}
+		return role;
 	}
 	
 	/**
@@ -118,28 +143,5 @@ public class UserService {
 		}	
 		// Return userList
 		return userList;
-	}
-	/**
-	 * Get the role information that corresponding to the user
-	 * 
-	 * @param userId 
-	 * @return Role object
-	 * @throws AppException
-	 */
-	public Role getUserRole(int userId) throws AppException {	
-		Role role = null;// Declare role
-		int roleId = -1; // Initialize  roleId
-		try {
-			//  Get the roleId that corresponding to the user
-			roleId = rightDao.getRoleIdByUserId(userId);
-			if(roleId > 0){
-				// Get role information
-				role = roleDao.getById(roleId); 
-			}
-		} catch (AppException e) {
-			e.printStackTrace();
-			throw new AppException("service.UserService.getUserRole");
-		}
-		return role;
 	}
 }

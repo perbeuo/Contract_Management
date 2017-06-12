@@ -133,6 +133,7 @@ public class UserDaoImpl implements UserDao {
 		}
 		return userId;
 	}
+	
 	/**
 	 * Query user information according to id
 	 * 
@@ -171,7 +172,7 @@ public class UserDaoImpl implements UserDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new AppException("com.ruanko.dao.impl.UserDaoImpl.getById");
+			throw new AppException("dao.impl.UserDaoImpl.getById");
 		} finally {
 			// Close the database operation object, release resources
 			DBUtil.closeResultSet(rs);

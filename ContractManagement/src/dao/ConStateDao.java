@@ -6,7 +6,7 @@ import model.ConState;
 import utils.AppException;
 
 /**
- * Contract State Data Access Layer Interface
+ * Contract Status Data Access Layer Interface
  */
 public interface ConStateDao {
 
@@ -14,15 +14,16 @@ public interface ConStateDao {
 	 * Add contract operation state information
 	 * 
 	 * @param  conState Contract state object
-	 * @return Return true if successful , otherwise false
+	 * @return boolean   Return true if successful , otherwise false
 	 * @throws AppException
 	 */
 	public boolean add(ConState conState) throws AppException;
+	
 	/**
 	 * Query contract id set that meet the conditions according to the contract type
 	 * 
 	 * @param type Operation type
-	 * @return contract id set
+	 * @return Contract id set
 	 * @throws AppException
 	 */
 	public List<Integer> getConIdsByType(int type) throws AppException;

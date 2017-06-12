@@ -12,10 +12,11 @@ public interface ContractDao {
 	 * Add contract information
 	 * 
 	 * @param contract Contract object
-	 * @return booleanReturn true if successful , otherwise false
+	 * @return boolean  Return true if successful , otherwise false
 	 * @throws AppException
 	 */
 	public boolean add(Contract contract) throws AppException;
+	
 	/**
 	 * Query contract information according to contract id
 	 * 

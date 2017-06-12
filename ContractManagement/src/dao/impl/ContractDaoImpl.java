@@ -10,6 +10,7 @@ import model.Contract;
 import utils.AppException;
 import utils.DBUtil;
 
+
 /**
  * Contract data access layer implementation class
  */
@@ -23,8 +24,8 @@ public class ContractDaoImpl implements ContractDao {
 	 * @throws AppException
 	 */
 	public boolean add(Contract contract) throws AppException{
-		boolean flag = false;// Operation flag 
-		//Declare Connection object,PreparedStatement object and ResultSet object
+		boolean flag = false;// Operation flag
+		//Declare Connection object,PreparedStatement object  and ResultSet object
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -72,6 +73,7 @@ public class ContractDaoImpl implements ContractDao {
 		}
 		return flag;
 	}
+	
 	/**
 	 * pQuery contract object according to contract id
 	 * 
@@ -128,4 +130,5 @@ public class ContractDaoImpl implements ContractDao {
 		}
 		return contract;
 	}
+	
 }

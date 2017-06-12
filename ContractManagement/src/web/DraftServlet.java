@@ -1,4 +1,4 @@
-package webcontract;
+package web;
 
 import java.io.IOException;
 import java.text.ParseException;
