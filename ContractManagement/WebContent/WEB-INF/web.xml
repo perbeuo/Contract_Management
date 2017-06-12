@@ -155,4 +155,33 @@
 		<servlet-name>draft</servlet-name>
 		<url-pattern>/draft</url-pattern>
 	</servlet-mapping>
+	<!-- Configure the access of ToDfphtListServlet -->
+	<servlet>
+		<servlet-name>toDfphtList</servlet-name>
+		<servlet-class>web.ToDfphtListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toDfphtList</servlet-name>
+		<url-pattern>/toDfphtList</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ToAssignOperServlet-->
+	<servlet>
+		<servlet-name>toAssignOper</servlet-name>
+		<servlet-class>web.ToAssignOperServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toAssignOper</servlet-name>
+		<url-pattern>/toAssignOper</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of AssignOperServlet -->
+	<servlet>
+		<servlet-name>assignOper</servlet-name>
+		<servlet-class>web.AssignOperServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>assignOper</servlet-name>
+		<url-pattern>/assignOper</url-pattern>
+	</servlet-mapping>
 </web-app>

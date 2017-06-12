@@ -16,5 +16,13 @@ public interface ContractDao {
 	 * @throws AppException
 	 */
 	public boolean add(Contract contract) throws AppException;
+	/**
+	 * Query contract information according to contract id
+	 * 
+	 * @param id Contract id
+	 * @return Contract object
+	 * @throws AppException
+	 */
+	public Contract getById(int id) throws AppException;
 	
 }

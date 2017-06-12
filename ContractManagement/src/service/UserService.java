@@ -3,6 +3,10 @@ package service;
 import model.User;
 import model.Role;
 import utils.AppException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import dao.*;
 import dao.impl.*;
 
@@ -79,6 +83,42 @@ public class UserService {
 		}
 	}
 	
+	/**
+	 * Get user list that corresponding to the role
+	 * 
+	 * @param roleId 
+	 * @return User list
+	 * @throws AppException
+	 */
+	public List<User> getUserListByRoleId(int roleId) throws AppException {
+		// Initialize  userList
+		List<User> userList = new ArrayList<User>();
+		// Declare userIds
+		List<Integer> userIds = null; 
+		
+		try {
+			/*
+			 * 1.Get designated user's userIds
+			 */
+			userIds = rightDao.getUserIdsByRoleId(roleId);
+			
+			/*
+			 * 2.Get user information list according to userIds
+			 */ 
+			for (int userId : userIds) {
+				// Get user's information
+				User user = userDao.getById(userId);
+				if (user != null) {
+					userList.add(user); 
+				}
+			}
+		} catch (AppException e) {
+			e.printStackTrace();
+			throw new AppException("service.UserService.getUserList");
+		}	
+		// Return userList
+		return userList;
+	}
 	/**
 	 * Get the role information that corresponding to the user
 	 * 
