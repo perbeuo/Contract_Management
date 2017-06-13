@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import dao.ContractDao;
 import model.Contract;
@@ -131,4 +133,95 @@ public class ContractDaoImpl implements ContractDao {
 		return contract;
 	}
 	
+	/**
+	 * Query contract id set according to user id
+	 * 
+	 * @param id Contract id
+	 * @return Contract id set
+	 * @throws AppException
+	 */
+	public List<Integer> getIdsByUserId(int userId) throws AppException {
+		// Initialize ids
+		List<Integer> ids = new ArrayList<Integer>();
+		//Declare Connection object,PreparedStatement object and ResultSet object
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		try {
+			// Create database connection
+			conn = DBUtil.getConnection();
+			// Declare operation statement,query contract id according to user id, "?" is a Placeholder
+			String sql = "select id "
+					+"from t_contract "
+					+"where user_id = ? and del = 0";
+			// Pre-compiled sql
+			psmt = conn.prepareStatement(sql);
+			// Set values for the placeholder '?'
+			psmt.setInt(1, userId);
+			//  Query result set
+			rs = psmt.executeQuery();
+			
+			// Get information in result set by loop,and save it to conIds
+			while (rs.next()) {
+				ids.add(rs.getInt("id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException("dao.impl.ContractDaoImpl.getIdsByUserId");
+		} finally {
+			// Close the database operation object, release resources
+			DBUtil.closeResultSet(rs);
+			DBUtil.closeStatement(psmt);
+			DBUtil.closeConnection(conn);
+		}
+		return ids;
+	}
+	
+	/**
+	 * Update contract's content according to contract id,passing parameters through entity object 
+	 * 
+	 * @param conId Contract id
+	 * @return boolean Return true if successful , otherwise false
+	 * @throws AppException
+	 */
+	public boolean updateById(Contract contract) throws AppException {
+		boolean flag = false;// Operation flag
+		//Declare Connection object,PreparedStatement object
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		try {
+			// Create database connection
+			conn = DBUtil.getConnection();
+			// Declare sql:update contract information according to contract id
+			String sql = "update t_contract set name = ?, customer = ?, beginTime = ?, endTime = ?, content = ? " 
+					+"where id = ? and del = 0";
+
+			// Pre-compiled sql, and set the parameter values
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, contract.getName());
+			psmt.setString(2, contract.getCustomer());
+			// Turn java.util.Dat to java.sql.Date
+			java.sql.Date beginTime = new java.sql.Date(contract.getBeginTime().getTime());
+			java.sql.Date endTime = new java.sql.Date(contract.getEndTime().getTime());
+			psmt.setDate(3, beginTime);
+			psmt.setDate(4, endTime);
+			psmt.setString(5, contract.getContent());
+			psmt.setInt(6, contract.getId());
+
+			// Execute update,return affected rows
+			int count = psmt.executeUpdate();
+			
+			if (count > 0) {// If affected lines greater than 0, so update success
+				flag = true;
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException("dao.impl.ContractDaoImpl.updateById");
+		} finally {
+			// Close the database operation object, release resources
+			DBUtil.closeStatement(psmt);
+			DBUtil.closeConnection(conn);
+		}
+		return flag;
+	}
 }

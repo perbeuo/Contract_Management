@@ -59,4 +59,23 @@ public interface ConProcessDao {
 	 */
 	public int getTotalCount(ConProcess conProcess) throws AppException;
 	
+	/**
+	 * Query contract process id set according to contract id,operation type and its corresponding operation state
+	 * 
+	 * @param conId Contract id
+	 * @param type Operation type 
+	 * @param state Operation state that corresponding operation type
+	 * @return ontract process id set 
+	 * @throws AppException
+	 */
+	public List<Integer> getIds(int conId, int type, int state) throws AppException;
+	
+	/**
+	 * Query contract process information according to contract process
+	 * 
+	 * @param id Contract id
+	 * @return Contract process object
+	 * @throws AppException
+	 */
+	public ConProcess getById(int id) throws AppException;
 }

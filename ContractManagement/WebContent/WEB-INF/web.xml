@@ -226,4 +226,45 @@
 		<servlet-name>contractDetail</servlet-name>
 		<url-pattern>/contractDetail</url-pattern>
 	</servlet-mapping>
+	
+	<!-- Configure the access of ToDdghtListServlet -->
+	<servlet>
+		<servlet-name>toDdghtList</servlet-name>
+		<servlet-class>web.ToDdghtListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toDdghtList</servlet-name>
+		<url-pattern>/toDdghtList</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ToDgContract -->
+	<servlet>
+		<servlet-name>toDgContract</servlet-name>
+		<servlet-class>web.ToDgContractServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toDgContract</servlet-name>
+		<url-pattern>/toDgContract</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of DgContract -->
+	<servlet>
+		<servlet-name>dgContract</servlet-name>
+		<servlet-class>web.DgContractServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dgContract</servlet-name>
+		<url-pattern>/dgContract</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ShowHQOpinionServlet -->
+	<servlet>
+		<servlet-name>showHQOpinion</servlet-name>
+		<servlet-class>web.ShowHQOpinionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showHQOpinion</servlet-name>
+		<url-pattern>/showHQOpinion</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

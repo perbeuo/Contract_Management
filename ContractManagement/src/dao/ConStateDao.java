@@ -38,4 +38,15 @@ public interface ConStateDao {
 	 */
 	public ConState getConState(int conId, int type) throws AppException;
 	
+	/**
+	 * Judgement records in contract table  according to contract id and type
+	 * Judgement though the statistics of the total eligible records
+	 * If total number of records is greater than 0, the record exist, return true, otherwise the record does not exist, returns false
+	 * 
+	 * @param con_id Countract id
+	 * @param type Operation type
+	 * @return boolean Exist return true，otherwise return false
+	 * @throws AppException
+	 */
+	public boolean isExist(int con_id, int type) throws AppException;
 }
