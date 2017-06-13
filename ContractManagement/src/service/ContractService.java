@@ -310,6 +310,151 @@ public class ContractService {
 	}
 	
 	/**
+	 * Query contract set that to be finalized
+	 * 
+	 * @param userId User id
+	 * @return Query all contracts that to be finalized
+	 * @throws AppException
+	 */
+	public List<ConBusiModel> getDdghtList(int userId) throws AppException {
+		// Initialize conList
+		List<ConBusiModel> conList = new ArrayList<ConBusiModel>();
+		// Initialize conIds,for saving id set of contracts that to be finalized
+		List<Integer> conIds = new ArrayList<Integer>();
+		
+		try {
+			/*
+			 * Get drafted and to be finalized contract ,contract to be finalized exist "STATE_CSIGNED" state
+			 * And do not exist "STATE_FINALIZED" state at the same time
+			 */
+			/*
+			 * 1.Get id set of draft contracts
+			 */
+			List<Integer> drafConIds = contractDao.getIdsByUserId(userId);
+			
+			/*
+			 * 2.Screen out different id set of contracts to be finalized from drafted contracts,and save to conIds
+			 * Contracts to be finalized:exist "STATE_CSIGNED" state,do not exist "STATE_FINALIZED" state at the same time
+			 */
+			for (int dConId : drafConIds) {
+				if (conStateDao.isExist(dConId, Constant.STATE_CSIGNED)
+						&& !conStateDao.isExist(dConId,Constant.STATE_FINALIZED)) {
+					conIds.add(dConId);
+				}
+			}
+			
+			/* 
+			 * 3.Get contract's information that to be finalized,and save to  contract business entity object,and put entity class to conList 
+			 */
+			for (int conId : conIds) {
+				// Get information of designated contract
+				Contract contract = contractDao.getById(conId);
+				// Get status of designated contract
+				ConState conState = conStateDao.getConState(conId, Constant.STATE_DRAFTED);
+				// Initialize conBusiModel
+				ConBusiModel conBusiModel = new ConBusiModel();
+				if (contract != null) {
+					// Set contract id and name to conBusiModel object
+					conBusiModel.setConId(contract.getId());
+					conBusiModel.setConName(contract.getName());
+				}
+				if (conState != null) {
+					// Set drafting time to conBusiModel object
+					conBusiModel.setDrafTime(conState.getTime()); 
+				}
+				conList.add(conBusiModel);
+			}
+		} catch (AppException e) {
+			e.printStackTrace();
+			throw new AppException("service.ContractService.getDdghtList");
+		}
+		// Return conList
+		return conList;
+	}
+	
+	/**
+	 * Finalize  contract 
+	 * 
+	 * @param contract Contract object
+	 * @return boolean Return true if operation successfully，otherwise return false 
+	 * @throws AppException
+	 */
+	public boolean finalize(Contract contract) throws AppException {
+		boolean flag = false;// Define flag 
+
+		try {
+			// Finalize contract:update contract's content
+			if (contractDao.updateById(contract)) {
+				/*
+				 * After finalize contract successfully, set contract's state to "STATE_FINALIZED"
+				 */
+				// Instantiation conState object, for encapsulate contract state information
+				ConState conState = new ConState();
+
+				conState.setConId(contract.getId());
+				// Set contract state type to "STATE_FINALIZED"
+				conState.setType(Constant.STATE_FINALIZED);
+				
+				// Save contract state information,assign result to flag
+				flag = conStateDao.add(conState);
+			}
+		} catch (AppException e) {
+			e.printStackTrace();
+			throw new AppException(
+					"service.ContractService.finalize");
+		}
+		return flag;
+	}
+	
+	/**
+	 * Show countersign opinion
+	 * 
+	 * @param conId Contract id
+	 * @return Contract state object set
+	 * @throws AppException
+	 */
+	public List<CSignatureOpinion> showHQOpinion(int conId) throws AppException {
+		// Initialize csOpinionList
+		List<CSignatureOpinion> csOpinionList = new ArrayList<CSignatureOpinion>();
+		
+		try {
+			
+			/*
+			 * 1.Get id set of countersign contract 
+			 */
+			List<Integer> conProcessIds = conProcessDao.getIds(conId, Constant.PROCESS_CSIGN, Constant.DONE);
+			/*
+			 * 2.Get countersign people and countersign opinion, and designate contract process type to "PROCESS_CSIGN",corresponding "STATE_FINALIZED" state
+			 */ 
+			for (int id : conProcessIds) {
+				// Get contract process information
+				ConProcess conProcess = conProcessDao.getById(id);
+				// Get countersign people's information
+				User user = userDao.getById(conProcess.getUserId());
+				// Initialize csOpinion
+				CSignatureOpinion csOpinion = new CSignatureOpinion();
+				// Set contract id to csOpinion object 
+				csOpinion.setConId(conId);
+				if (conProcess != null) {
+					// Set signature opinion to conBusiModel object
+					csOpinion.setOpinion(conProcess.getContent());
+				}
+				if (user != null) {
+					// Set countersign people to csOpinion object
+					csOpinion.setCsOperator(user.getName());
+				}
+				csOpinionList.add(csOpinion);
+			}
+		} catch (AppException e) {
+			e.printStackTrace();
+			throw new AppException(
+					"service.ContractService.showHQOpinion");
+		}
+		return csOpinionList;
+		
+	}
+	
+	/**
 	 * Generated contract number, the rule is: year month day hour minute second+5 random numbers when drafting contract,
 	 * Will generate a unique number stored in the database, but the contract number is not the primary key in the table.
 	 */

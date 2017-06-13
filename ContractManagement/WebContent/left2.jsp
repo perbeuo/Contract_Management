@@ -17,7 +17,7 @@
 					<a href="toDraft" target="main">Draft Contract</a>
 				</dd>
 				<dd>
-					<a href="#">Contract to be finalized</a>
+					<a href="toDdghtList" target="main">Contract to be finalized</a>
 				</dd>
 				<dd>
 					<a href="#">Finalized Contract</a>

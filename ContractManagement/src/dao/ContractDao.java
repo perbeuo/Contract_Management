@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import model.Contract;
 import utils.AppException;
 
@@ -26,4 +28,22 @@ public interface ContractDao {
 	 */
 	public Contract getById(int id) throws AppException;
 	
+	/**
+	 * Query contract id set according to user is
+	 * 
+	 * @param id User id
+	 * @return Contract is set
+	 * @throws AppException
+	 */
+	public List<Integer> getIdsByUserId(int userId) throws AppException;
+	
+	/**
+	 * Update contract's content according to contract id,
+	 * passing parameters through entity object 
+	 * 
+	 * @param conId Contract id
+	 * @return boolean Return true if successful , otherwise false
+	 * @throws AppException
+	 */
+	public boolean updateById(Contract contract) throws AppException;
 }

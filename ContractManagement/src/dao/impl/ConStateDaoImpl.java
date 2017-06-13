@@ -26,7 +26,7 @@ public class ConStateDaoImpl implements ConStateDao {
 	 */
 	public boolean add(ConState conState) throws AppException{	
 		boolean flag = false;// Operation flag
-		//Declare Connection object,PreparedStatement object
+		//Declare Connection object,PreparedStatement object and ResultSet object
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		
@@ -159,4 +159,54 @@ public class ConStateDaoImpl implements ConStateDao {
 		return conState;
 	}
 
+	/**
+	 * Judgement records in contract table  according to contract id and type
+	 * Judgement though the statistics of the total eligible records
+	 * If total number of records is greater than 0, the record exist, return true, 
+	 * otherwise the record does not exist, returns false
+	 * @param con_id Countract id
+	 * @param type Operation type
+	 * @return boolean Exist return true ,otherwise return false
+	 * @throws AppException
+	 */
+	public boolean isExist(int con_id, int type) throws AppException {
+		boolean flag = false;// Operation flag
+		
+		//Declare Connection object,PreparedStatement object and ResultSet object
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		try {
+			// Create database connection
+			conn = DBUtil.getConnection();
+			// Declare operation statement,query total number of eligible records according to contract id and operation type, "?" is a Placeholder
+			String sql = "select count(id) as n from t_contract_state "
+				 +"where con_id = ? and type = ? and del = 0";
+				
+			psmt = conn.prepareStatement(sql);// Pre-compiled sql
+			// Set values for the placeholder 
+			psmt.setInt(1, con_id);
+			psmt.setInt(2, type);
+
+			// Execute query operation 
+			rs = psmt.executeQuery();
+			rs.next();
+			int n = rs.getInt("n"); // Parameter "n" represents the total number of records
+			if (n > 0) {
+				flag = true;  // If record exist,flag is set to true
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(
+			"dao.impl.ConStateDaoImpl.isExist");
+		} finally {
+			// Close database operation object, release resources
+			DBUtil.closeResultSet(rs);
+			DBUtil.closeStatement(psmt);
+			DBUtil.closeConnection(conn);
+		}
+		return flag;
+	}
 }
