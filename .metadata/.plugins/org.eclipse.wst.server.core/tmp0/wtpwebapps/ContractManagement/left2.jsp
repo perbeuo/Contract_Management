@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Contract Management System - Operator menu bar</title>
+		<title>合同管理系统 - 操作者菜单</title>
 		<link href="css/frame.css" rel="stylesheet" type="text/css" />
 	</head>
 
@@ -11,52 +11,52 @@
 		<div class="menu">
 			<dl>
 				<dt>
-					Draft
+					起草
 				</dt>
 				<dd>
-					<a href="toDraft" target="main">Draft Contract</a>
+					<a href="toDraft" target="main">起草合同</a>
 				</dd>
 				<dd>
-					<a href="toDdghtList" target="main">Contract to be finalized</a>
+					<a href="toDdghtList" target="main">定稿合同</a>
 				</dd>
 				<dd>
-					<a href="#">Finalized Contract</a>
+					<a href="#">已定稿合同</a>
 				</dd>
 				<dd>
-					<a href="#">Query Process</a>
+					<a href="#">查询进度</a>
 				</dd>
 			</dl>
 			<dl>
 				<dt>
-					Countersign
+					会签
 				</dt>
 				<dd>
-					<a href="toDhqhtList" target="main">Contract to be countersigned</a>
+					<a href="toDhqhtList" target="main">会签合同</a>
 				</dd>
 				<dd>
-					<a href="#">Countersigned Contract </a>
+					<a href="#">已会签合同 </a>
 				</dd>
 			</dl>
 			<dl>
 				<dt>
-					Approve
+					审批
 				</dt>
 				<dd>
-					<a href="#">Contract to be approved</a>
+					<a href="#">审批合同</a>
 				</dd>
 				<dd>
-					<a href="#">Approved Contract</a>
+					<a href="#">已审批合同</a>
 				</dd>
 			</dl>
 			<dl>
 				<dt>
-					Sign
+					签订
 				</dt>
 				<dd>
-					<a href="#">Contract to be signed</a>
+					<a href="#">签订合同</a>
 				</dd>
 				<dd>
-					<a href="#">Signed Contract</a>
+					<a href="#">已签订合同</a>
 				</dd>
 			</dl>
 		</div>

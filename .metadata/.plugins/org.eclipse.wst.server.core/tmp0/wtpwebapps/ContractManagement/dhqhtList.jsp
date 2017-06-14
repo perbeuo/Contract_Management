@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link href="css/style.css" rel="stylesheet" media="screen"
 			type="text/css" />
-		<title>List of contract to be countersigned</title>
+		<title>待会签合同列表</title>
 		<!-- Use JavaScript script to open a new window display information when preview-->
 		<script>
 			function preview(url) {
@@ -17,12 +17,12 @@
 
 	<body>
 		<div class="mtitle">
-			Contract to be countersigned
+			待会签合同
 		</div>
 		
 		<div class="search">
 			<form>
-				Search contract to be countersigned:
+				查询待会签合同:
 				<input value="Enter search conditions.." />
 				&nbsp;&nbsp;
 				<input type="submit" value="Search" class="search-submit"/> <br />
@@ -33,13 +33,13 @@
 		  <table>
 			<tr>
 				<th>
-					Contract name
+					合同名
 				</th>
 				<th class="th1">
-					Draft time 
+					起草时间
 				</th>
 				<th class="th2">
-					Operation
+					操作
 				</th>
 			</tr>
 			<%
@@ -56,7 +56,7 @@
 				<td>
 					<a href="toAddHQOpinion?conId=<%=cbm.getConId()%>">
 						<img src="images/icon-edit.png"  alt="Countersign" />
-						 Countersign
+						 会签
 					</a>
 				</td>
 			</tr>
@@ -74,9 +74,7 @@
 			<a href="#"><img src="images/page/next.png"  alt="" /></a>&nbsp;
 			<a href="#"><img src="images/page/last.png"  alt="" /></a>&nbsp;
 					
-			<span class="pageinfo">
-				Total&nbsp;<strong>2</strong>&nbsp;pages&nbsp;<strong>13</strong>&nbsp;records
-			</span>	
+			
 		</div>
 	</body>
 </html>

@@ -21,7 +21,7 @@
 
 	<body>
 		<div class="mtitle">
-			Finalize contract
+			定稿合同
 		</div>
 		<br />
 		<form action="dgContract" method="post">
@@ -35,24 +35,24 @@
 			<input type="hidden" name="conId" value="<%=contract.getId()%>" readonly="readonly">
 			<table class="update" style="width:700px;">	
 				<tr height="28">
-					<td width="140">Contract name:</td>
+					<td width="140">合同名:</td>
 					<td><input type="text" id="name" name="name" value="<%=contract.getName()%>" readonly="readonly"></td>
 				</tr>
 				<tr height="28">
-					<td>Customer:</td>
+					<td>客户:</td>
 					<td><input type="text" name="customer" value="<%=contract.getCustomer()%>" readonly="readonly"></td>
 				</tr>
 				<tr>
-					<td>Begin time:</td>	
+					<td>开始时间:</td>	
 					<td><input type="text" id="beginTime" name="beginTime" value="<%=contract.getBeginTime()%>" readonly="readonly"></td>
 					
 				</tr>
 				<tr>
-					<td>End time:</td>	
+					<td>终止时间:</td>	
 					<td><input type="text" id="endTime" name="endTime" value="<%=contract.getEndTime()%>" readonly="readonly"></td>
 				</tr>
 				<tr>
-					<td>Content:</td>	
+					<td>内容:</td>	
 					<td></td>
 				</tr>
 				<tr>
@@ -61,14 +61,14 @@
 					</td>
 				</tr>
 				<tr height="28">
-					<td>Attachment:</td>
+					<td>附件:</td>
 					<td><input type="file" /></td>
 				</tr>
 				<tr height="28">
 					<td align="center" colspan="2">
-						<input type="submit" value="Submit" class="button" onclick="return check()">
+						<input type="submit" value="提交" class="button" onclick="return check()">
 						 &nbsp; &nbsp; &nbsp;
-						<input type="reset" value="Reset" class="button">
+						<input type="reset" value="充值" class="button">
 					</td>
 				</tr>
 			</table>

@@ -55,7 +55,7 @@ public class ContractService {
 			if (contractDao.add(contract)) {
 				// Instantiate conState object
 				ConState conState = new ConState();
-				conState.setConId(contract.getId());  // Get contract ID, and set it into conState object
+				conState.setConId(contract.getId());  // 获得合同ID, and set it into conState object
 				// Set type of contract status to "STATE_DRAFTED"
 				conState.setType(Constant.STATE_DRAFTED);
 				// Save contract status information, the operating result is assigned to flag
@@ -193,7 +193,7 @@ public class ContractService {
 		conProcess.setState(Constant.UNDONE);
 		try {
 			/*
-			 * 1.Get contract id set that to be countersigned
+			 * 1.获得合同ID set that to be countersigned
 			 */
 			List<Integer> conIds = conProcessDao.getConIds(conProcess);
 
@@ -383,10 +383,10 @@ public class ContractService {
 		boolean flag = false;// Define flag 
 
 		try {
-			// Finalize contract:update contract's content
+			// 定稿合同:update contract's content
 			if (contractDao.updateById(contract)) {
 				/*
-				 * After finalize contract successfully, set contract's state to "STATE_FINALIZED"
+				 * After 定稿合同 successfully, set contract's state to "STATE_FINALIZED"
 				 */
 				// Instantiation conState object, for encapsulate contract state information
 				ConState conState = new ConState();

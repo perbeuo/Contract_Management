@@ -14,47 +14,47 @@ import utils.AppException;
 import utils.DBUtil;
 
 /**
- * Contract process data access layer implementation class
+ * 合同进程 - 数据实现层
  */
 public class ConProcessDaoImpl implements ConProcessDao{
 	
 	/**
-	 * Determine whether the record of specified contract id is exist in the contract process table
+	 * 判断特定ID的合同进程是否存在
 	 * 
-	 * @param conId Contract id
-	 * @return boolean Return true if exist,otherwise return false
+	 * @param conId 合同ID
+	 * @return boolean 存在则返回true
 	 * @throws AppException
 	 */
 	public boolean isExist(int conId) throws AppException{
-		boolean flag = false;// Operation flag
+		boolean flag = false;// 是否成功_flag
 		
-		//Declare Connection object,PreparedStatement object and ResultSet object
+		//声明连接对象、语句和结果集
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
 		try {
-			// Create database connection
+			// 建立数据库连接
 			conn = DBUtil.getConnection();
-			// Declare operation statement:specifies the amount of contract Id's records, "?" is a placeholder
+			// 查询语句
 			String sql = "select count(id) as n from t_contract_process where con_id = ? and del = 0";
 				
-			psmt = conn.prepareStatement(sql);// pre-compiled sql
-			// Set values for the placeholder
+			psmt = conn.prepareStatement(sql);// 预编译语句
+			// 赋值
 			psmt.setInt(1, conId);
-			// Execute query operation
+			// 执行查询语句
 			rs = psmt.executeQuery();
 			rs.next();
-			int n =  rs.getInt("n"); // Parameter "n" represents the total number of records
+			int n =  rs.getInt("n"); 
 			if (n > 0) {
-				flag = true; // Designated contract ID exist,flag is set to true
+				flag = true; 
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new AppException(
-			"dao.impl.ConProcessDaoImpl.isExist");
+			"dao.impl.ConProcessDaoImpl.isExist error");
 		} finally {
-			// Close database operation object, release resources
+			// 关闭数据库操作对象，释放资源
 			DBUtil.closeResultSet(rs);
 			DBUtil.closeStatement(psmt);
 			DBUtil.closeConnection(conn);
@@ -63,43 +63,43 @@ public class ConProcessDaoImpl implements ConProcessDao{
 	}
 	
 	/**
-	 * Add contract operation process information
+	 * 添加合同进程信息
 	 * 
-	 * @param  conProcess Contract process object
-	 * @return boolean Return true if exist,otherwise return false
+	 * @param  conProcess 合同进程实体
+	 * @return boolean 成功则返回true
 	 * @throws AppException
 	 */
 	public boolean add(ConProcess conProcess)  throws AppException{	
-		boolean flag = false;// Operation flag
-		//Declare Connection object,PreparedStatement object and ResultSet object
+		boolean flag = false;// 是否成功_flag
+		//声明连接对象、语句和结果集
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		
 		try {
-			// Create database connection
+			// 建立数据库连接
 			conn = DBUtil.getConnection();
-			// Declare operation statement:save contact operation process information, "?" is a placeholder
+			// 查询语句
 			String sql = "insert into t_contract_process(con_id,user_id,type,state,content) values(?,?,?,?,?)";
 				
-			psmt = conn.prepareStatement(sql);// pre-compiled sql
-			// Set values for the placeholder
+			psmt = conn.prepareStatement(sql);// 预编译语句
+			// 赋值
 			psmt.setInt(1, conProcess.getConId());
 			psmt.setInt(2, conProcess.getUserId());
 			psmt.setInt(3, conProcess.getType());
 			psmt.setInt(4, conProcess.getState());
 			psmt.setString(5, conProcess.getContent());
 		
-			int result = psmt.executeUpdate();// Execute update
+			int result = psmt.executeUpdate();// 执行语句
 			
-			if(result > 0){// If the affected lines greater than 0, the operation success
+			if(result > 0){
 				flag = true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new AppException(
-			"dao.impl.ConProcessDaoImpl.add");
+			"dao.impl.ConProcessDaoImpl.add error");
 		} finally {
-			// Close database operation object, release resources
+			// 关闭数据库操作对象，释放资源
 			DBUtil.closeStatement(psmt);
 			DBUtil.closeConnection(conn);
 		}
@@ -107,47 +107,47 @@ public class ConProcessDaoImpl implements ConProcessDao{
 	}
 	
 	/**
-	 * Query all contract ids that meet the conditions from contract process table
+	 * 查询符合条件的合同进程
 	 * 
-	 * @param Contract process object
-	 * @return Contract id set
+	 * @param Contract 合同进程对象
+	 * @return 合同id列表
 	 * @throws AppException
 	 */
 	public List<Integer> getConIds(ConProcess conProcess) throws AppException {
-		// Initialize conIds
+		// 初始化
 		List<Integer> conIds = new ArrayList<Integer>();
 		
-		//Declare Connection object,PreparedStatement object and ResultSet object
+		//声明连接对象、语句和结果集
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
 		try {
-			// Create database connection
+			// 建立数据库连接
 			conn = DBUtil.getConnection();
-			// Declare operation statement:query contract id according to user id,contract operation type and operation state, "?" is a placeholder
+			// 查询语句
 			String sql = "select con_id from t_contract_process " +
 					"where user_id= ? and type = ? and state = ? and del=0";
 				
-			psmt = conn.prepareStatement(sql);// pre-compiled sql
-			// Set values for the placeholder
+			psmt = conn.prepareStatement(sql);// 预编译语句
+			// 赋值
 			psmt.setInt(1, conProcess.getUserId());
 			psmt.setInt(2, conProcess.getType());
 			psmt.setInt(3, conProcess.getState());
 			
-			// Execute query operation
+			// 执行查询语句
 			rs = psmt.executeQuery();
 			
-			// Get information in result set by loop,and save it to conIds
+			// 获得结果集，放入list
 			while (rs.next()) {
 				conIds.add(rs.getInt("con_id"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new AppException(
-			"dao.impl.ConProcessDaoImpl.getConIds");
+			"dao.impl.ConProcessDaoImpl.getConIds error");
 		} finally {
-			// Close database object operation, release resources
+			// 关闭数据库操作对象，释放资源
 			DBUtil.closeResultSet(rs);
 			DBUtil.closeStatement(psmt);
 			DBUtil.closeConnection(conn);
@@ -156,50 +156,48 @@ public class ConProcessDaoImpl implements ConProcessDao{
 	}
 	
 	/**
-	 * Update operation status,content and time info of contract according to user id,contract id and operation type
+	 * 更新合同信息
 	 * 
-	 * @param  userId User id
-	 * @param  conId Contract id
-	 * @param  type Operation type
-	 * @return boolean Return true if successful , otherwise false
+	 * @param  userId 用户ID
+	 * @param  conId 合同ID
+	 * @param  type  操作类型
+	 * @return boolean 成功则返回true
 	 * @throws AppException
 	 */
 	public boolean update(ConProcess conProcess) throws AppException {
-		boolean flag = false;// Operation flag
-		//Declare Connection object,PreparedStatement object and ResultSet object
+		boolean flag = false;// 是否成功_flag
+		//声明连接对象、语句和结果集
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		try {
-			// Create database connection
+			// 建立数据库连接
 			conn = DBUtil.getConnection();
-			// Declare sql:update operation status,content and time info of contract according to user id,contract id and operation type
+			// 查询语句
 			String sql = "update t_contract_process set state = ?, content = ?, time = ? " 
 					+"where user_id = ? and con_id = ? and type = ?";
 
-			// Pre-compiled sql, and set the parameter values
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, conProcess.getState());
 			psmt.setString(2, conProcess.getContent());
 
-			// Date format is yyy-MM-dd hh:mm:ss
+			// 日期格式： yyyy-MM-dd hh:mm:ss
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			java.sql.Timestamp time = new java.sql.Timestamp(conProcess.getTime().getTime());
-			df.format(time); // Formatting time
+			df.format(time);
 			psmt.setTimestamp(3, time);
 			psmt.setInt(4, conProcess.getUserId());
 			psmt.setInt(5, conProcess.getConId());
 			psmt.setInt(6, conProcess.getType());
-			// Execute update, return the affected rows
 			int count = psmt.executeUpdate();
 			
-			if (count > 0) {// If affected lines greater than 0, the update is successful
+			if (count > 0) {
 				flag = true;
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
-			throw new AppException("dao.impl.ConProcessDaoImpl.update");
+			throw new AppException("dao.impl.ConProcessDaoImpl.update error");
 		} finally {
-			// Close the database operation object, release resources
+			// 关闭数据库操作对象，释放资源
 			DBUtil.closeStatement(psmt);
 			DBUtil.closeConnection(conn);
 		}
@@ -207,45 +205,45 @@ public class ConProcessDaoImpl implements ConProcessDao{
 	}
 	
 	/**
-	 * Query total number of eligible records from contract process table according to contract id,operation type and its processing state
+	 * 查询符合条件的合同数量
 	 * 
-	 * @param con_id Contract id
-	 * @param type Operation type
-	 * @param state State corresponding to the operation type
-	 * @return Total number of eligible records
+	 * @param con_id 合同ID
+	 * @param type 操作类型
+	 * @param state 操作的进程状态
+	 * @return 符合条件的合同数量
 	 * @throws AppException
 	 */
 	public int getTotalCount(ConProcess conProcess) throws AppException{
-		int totalCount = 0; // Initialize totalCount
+		int totalCount = 0;
 		
-		//Declare Connection object,PreparedStatement object and ResultSet object
+		//声明连接对象、语句和结果集
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
 		try {
-			// Create database connection
+			// 建立数据库连接
 			conn = DBUtil.getConnection();
-			// Declare operation statement:query total number of eligible records according to contract id,operation type and its processing state, "?" is a Placeholder
+			// 查询语句
 			String sql = "select count(id) as n from t_contract_process "
 				 +"where con_id = ? and type = ? and state = ?";
 				
-			psmt = conn.prepareStatement(sql);// Pre-compiled sql
-			// Set values for the placeholder 
+			psmt = conn.prepareStatement(sql);// 预编译语句
+			// 赋值 
 			psmt.setInt(1, conProcess.getConId());
 			psmt.setInt(2, conProcess.getType());
 			psmt.setInt(3, conProcess.getState());
-			// Execute query operation 
+			// 执行查询语句 
 			rs = psmt.executeQuery();
 			rs.next();
-			totalCount =  rs.getInt("n");  // Parameter "n" represents the total number of records
+			totalCount =  rs.getInt("n");  
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new AppException(
-			"dao.impl.ConProcessDaoImpl.getTotalCount");
+			"dao.impl.ConProcessDaoImpl.getTotalCount error");
 		} finally {
-			// Close database operation object, release resources
+			// 关闭数据库操作对象，释放资源
 			DBUtil.closeResultSet(rs);
 			DBUtil.closeStatement(psmt);
 			DBUtil.closeConnection(conn);
@@ -253,40 +251,38 @@ public class ConProcessDaoImpl implements ConProcessDao{
 		return totalCount;
 	}
 	/**
-	 * Query contract process id set according to contract id,operation type and its corresponding operation state
+	 * 查询符合条件的合同ID
 	 * 
-	 * @param conId Contract id
-	 * @param type Operation type
-	 * @param state Operation state that corresponding operation type
-	 * @return Contract process id set
+	 * @param conId 合同ID
+	 * @param type 操作类型
+	 * @param state 操作的进程状态
+	 * @return 符合条件的合同ID
 	 * @throws AppException
 	 */
 	public List<Integer> getIds(int conId, int type, int state) throws AppException {
-		// Initialize ids
 		List<Integer> ids = new ArrayList<Integer>();
 		
-		//Declare Connection object,PreparedStatement object and ResultSet object
+		//声明连接对象、语句和结果集
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
 		try {
-			// Create database connection
+			// 建立数据库连接
 			conn = DBUtil.getConnection();
-			// Declare operation statement:query contract process id set according to contract id,operation type and its corresponding operation state, "?" is a placeholder
+			// 查询语句
 			String sql = "select id from t_contract_process " +
 					"where con_id= ? and type = ? and state = ? and del=0";
 				
-			psmt = conn.prepareStatement(sql);// Pre-compiled sql
-			// Set values for the placeholder 
+			psmt = conn.prepareStatement(sql);// 预编译语句
+			// 赋值 
 			psmt.setInt(1, conId);
 			psmt.setInt(2, type);
 			psmt.setInt(3, state);
 			
-			// Execute query operation 
+			// 执行查询语句 
 			rs = psmt.executeQuery();
 			
-			// Get information in result set by loop,and save to Ids
 			while (rs.next()) {
 				ids.add(rs.getInt("id"));
 			}
@@ -295,7 +291,7 @@ public class ConProcessDaoImpl implements ConProcessDao{
 			throw new AppException(
 			"dao.impl.ConProcessDaoImpl.getIds");
 		} finally {
-			// Close the database operation object, release resources
+			// 关闭数据库操作对象，释放资源
 			DBUtil.closeResultSet(rs);
 			DBUtil.closeStatement(psmt);
 			DBUtil.closeConnection(conn);
@@ -304,37 +300,34 @@ public class ConProcessDaoImpl implements ConProcessDao{
 	}
 	
 	/**
-	 *  Query contract process information according to contract process id
+	 * 通过ID查询合同进程
 	 * 
-	 * @param id Contract id
-	 * @return Contract process object
+	 * @param id 合同ID
+	 * @return 合同进程对象
 	 * @throws AppException
 	 */
 	public ConProcess getById(int id) throws AppException {
-		// Declare conProcess
 		ConProcess conProcess = null;
 		
-		//Declare Connection object,PreparedStatement object and ResultSet object
+		//声明连接对象、语句和结果集
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 		
 		try {
-			// Create database connection
+			// 建立数据库连接
 			conn = DBUtil.getConnection();
-			// Define sql:query contract process information according to contract process id
+			// 查询语句
 			String sql = "select id,con_id,user_id,type,state,content,time "
 					+"from t_contract_process "
 					+"where id = ? and del = 0";
 
-			//Pre-compiled sql, and set the parameter values
+			//预编译语句
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, id); //Set contract id
 			
-			// Query result set
 			rs = psmt.executeQuery();
 
-			// Get information in result set by loop,and encapsulate to conProcess entity
 			if(rs.next()) {
 				conProcess = new ConProcess();
 				conProcess.setId(rs.getInt("id"));
@@ -351,7 +344,7 @@ public class ConProcessDaoImpl implements ConProcessDao{
 			throw new AppException(
 					"dao.impl.ConProcessDaoImpl.getById");
 		} finally {
-			// Close the database operation object, release resources
+			// 关闭数据库操作对象，释放资源
 			DBUtil.closeResultSet(rs);
 			DBUtil.closeStatement(psmt);
 			DBUtil.closeConnection(conn);

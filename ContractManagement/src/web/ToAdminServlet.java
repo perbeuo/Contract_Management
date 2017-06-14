@@ -18,12 +18,12 @@ public class ToAdminServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Set the request's character encoding
+		// 设定编码方式
 		request.setCharacterEncoding("UTF-8");
 		
-		// Declare session
+		// 声明会话
 		HttpSession session = null;
-		// Get session by using request object
+		// 获得会话 object
 		session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		// If the user is not logged in, then jump to the login page
@@ -36,11 +36,11 @@ public class ToAdminServlet extends HttpServlet {
 	}
 
 	/**
-	 * Process GET requests
+	 * 处理GET请求
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Call doPost() to process request
+		// 调用doPost方法来处理请求
 		this.doPost(request, response);
 	}
 	

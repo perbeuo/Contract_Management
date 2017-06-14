@@ -23,7 +23,7 @@ public class ToRegisterServlet extends HttpServlet {
 	}
 
 	/**
-	 * Process the GET requests, output the target page
+	 * 处理GET请求, output the target page
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

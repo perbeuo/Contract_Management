@@ -3,19 +3,19 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Contract Management System - Welcome</title>
+		<title>合同管理系统 - 欢迎</title>
 		<link href="css/frame.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 		<div class="content">
 			<p>
-			Welcome to Contract Management System!
+			欢迎使用合同管理系统!
 			<br>			
 			<%
 				Date now = new Date();
 				SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");//Parameter is time format you need
 			%>
-			Current time:<%=sdf.format(now)%>
+			登陆时间:<%=sdf.format(now)%>
 			</p>
 		</div>
 	</body>

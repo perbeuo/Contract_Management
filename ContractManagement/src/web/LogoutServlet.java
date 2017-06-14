@@ -9,32 +9,32 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet that process user logout
+ * 处理用户注销的Servlet
  */
 public class LogoutServlet extends HttpServlet{
 
 	/**
-	 * Process the logout POST request
+	 * 处理注销请求
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Declare session
+		// 声明会话
 		HttpSession session = null;
-		// Get session by using request object
+		// 获得会话 object
 		session = request.getSession();
-		// Delete use information from session
+		// 从会话中删除信息
 		session.removeAttribute("userId");
 		session.removeAttribute("userName");
-		// Redirect to login page
+		// 重定向到登录界面
 		response.sendRedirect("toLogin");
 	}
 
 	/**
-	 * Process the GET requests
+	 * 处理GET请求
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Call doPost() to process request
+		// 调用doPost方法来处理请求
 		this.doPost(request, response);
 	}
 	

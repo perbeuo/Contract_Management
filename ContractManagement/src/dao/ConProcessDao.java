@@ -6,75 +6,75 @@ import model.ConProcess;
 import utils.AppException;
 
 /**
- * Contract Process Data Access Layer Interface
+ * 合同进程 - 数据层
  */
 public interface ConProcessDao {
 
 	/**
-	 * Determine whether the record of specified contract id is exist in the contract process table
+	 * 判断特定ID的合同进程是否存在
 	 * 
-	 * @param conId Contract id
-	 * @return boolean Return true if exist,otherwise return false
+	 * @param conId 合同ID
+	 * @return boolean 存在则返回true
 	 * @throws AppException
 	 */
 	public boolean isExist(int conId) throws AppException;
 	
 	/**
-	 * Add contract operation process information
+	 * 添加合同进程信息
 	 * 
-	 * @param  conProcess Contract process object
-	 * @return boolean Return true if successful , otherwise false 
+	 * @param  conProcess 合同进程实体
+	 * @return boolean 成功则返回true
 	 * @throws AppException
 	 */
 	public boolean add(ConProcess conProcess) throws AppException;
 	
 	/**
-	 * Query all contract ids that meet the conditions from contract process table
+	 * 查询符合条件的合同进程
 	 * 
-	 * @param Contract process object
-	 * @return Contract id set
+	 * @param Contract 合同进程对象
+	 * @return 合同id列表
 	 * @throws AppException
 	 */
 	public List<Integer> getConIds(ConProcess conProcess) throws AppException;
 	
 	/**
-	 * Update status,content and time of contract process according to userId, userId and operation type
+	 * 更新合同信息
 	 * 
-	 * @param  userId User id
-	 * @param  conId Contract id
-	 * @param  type  Operation type
-	 * @return boolean Return true if successful , otherwise false 
+	 * @param  userId 用户ID
+	 * @param  conId 合同ID
+	 * @param  type  操作类型
+	 * @return boolean 成功则返回true
 	 * @throws AppException
 	 */
 	public boolean update(ConProcess conProcess) throws AppException;
 	
 	/**
-	 * Query total number of eligible records from contract process table according to contract id, operation type and its processing state
+	 * 查询符合条件的合同数量
 	 * 
-	 * @param con_id Contract id
-	 * @param type Operation type
-	 * @param state Processing state of Operation type
-	 * @return Total number of eligible records
+	 * @param con_id 合同ID
+	 * @param type 操作类型
+	 * @param state 操作的进程状态
+	 * @return 符合条件的合同数量
 	 * @throws AppException
 	 */
 	public int getTotalCount(ConProcess conProcess) throws AppException;
 	
 	/**
-	 * Query contract process id set according to contract id,operation type and its corresponding operation state
+	 * 查询符合条件的合同ID
 	 * 
-	 * @param conId Contract id
-	 * @param type Operation type 
-	 * @param state Operation state that corresponding operation type
-	 * @return ontract process id set 
+	 * @param conId 合同ID
+	 * @param type 操作类型
+	 * @param state 操作的进程状态
+	 * @return 符合条件的合同ID
 	 * @throws AppException
 	 */
 	public List<Integer> getIds(int conId, int type, int state) throws AppException;
 	
 	/**
-	 * Query contract process information according to contract process
+	 * 通过ID查询合同进程
 	 * 
-	 * @param id Contract id
-	 * @return Contract process object
+	 * @param id 合同ID
+	 * @return 合同进程对象
 	 * @throws AppException
 	 */
 	public ConProcess getById(int id) throws AppException;

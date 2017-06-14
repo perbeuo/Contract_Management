@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link href="css/style.css" rel="stylesheet" media="screen"
 			type="text/css" />
-		<title>List of contract to be finalized</title>
+		<title>定稿合同列表</title>
 		<!-- Use JavaScript script to open a new window display information when preview-->
 		<script>
 			function preview(url) {
@@ -17,13 +17,13 @@
 
 	<body>
 		<div class="mtitle">
-			Contract to be finalized
+			待定稿合同
 		</div>
 		
 		<div class="search">
 			<form>
-				Search contract to be finalized
-				<input value="Enter the search conditions.." />
+				查找待定稿合同
+				<input value="" />
 				&nbsp;&nbsp;
 				<input type="submit" value="Search" class="search-submit"/> <br />
 			</form>
@@ -33,13 +33,13 @@
 		  <table>
 			<tr>
 				<th>
-					Contract name
+					合同名
 				</th>
 				<th class="th1">
-					Draft time
+					起草时间
 				</th>
 				<th width="270px">
-					Operation
+					操作
 				</th>
 			</tr>
 			<%
@@ -56,12 +56,12 @@
 				<td>
 					<a href="showHQOpinion?conId=<%=cbm.getConId()%>">
 						<img src="images/information.png"  alt="Countersign opinion" />
-						Countersign  opinion
+						会签意见
 					</a> 
 					&nbsp;|&nbsp;
 					<a href="toDgContract?conId=<%=cbm.getConId()%>">
 						<img src="images/icon-edit.png"  alt="Finalize" />
-						Finalize   
+						定稿
 					</a>
 				</td>
 			</tr>
@@ -79,9 +79,7 @@
 			<a href="#"><img src="images/page/next.png"  alt="" /></a>&nbsp;
 			<a href="#"><img src="images/page/last.png"  alt="" /></a>&nbsp;
 					
-			<span class="pageinfo">
-				Total&nbsp;<strong>2</strong>&nbsp;pages&nbsp;<strong>13</strong>&nbsp;records
-			</span>		
+	
 		</div>
 	</body>
 </html>

@@ -23,7 +23,7 @@ public class ToLoginServlet extends HttpServlet {
 	}
 
 	/**
-	 * Process the GET requests, output login page
+	 * ¥¶¿ÌGET«Î«Û, output login page
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

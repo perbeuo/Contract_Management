@@ -16,29 +16,29 @@ import service.ContractService;
 import utils.AppException;
 
 /**
- * Servlet for finalize contract
+ *  用来定稿合同的Servlet
  */
 public class DgContractServlet extends HttpServlet {
 
 	/**
-	 * Process Post requests of finalize contract
+	 * 处理 定稿合同的请求
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Set the request's character encoding
+		// 设定编码方式
 		request.setCharacterEncoding("UTF-8");
 
-		// Declare session
+		// 声明会话
 		HttpSession session = null;
-		// Get session by using request
+		// 获得会话
 		session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
 
-		// If user is not login, jump to login page
+		// 如果用户没有登录则跳转到登陆界面
 		if (userId == null) {
 			response.sendRedirect("toLogin");
 		} else {
-			// Get data information of contract
+			// 获得合同信息
 			int conId = Integer.parseInt(request.getParameter("conId"));
 			String name = request.getParameter("name");
 			String customer = request.getParameter("customer");
@@ -46,20 +46,18 @@ public class DgContractServlet extends HttpServlet {
 			String endTime = request.getParameter("endTime");
 			String content = request.getParameter("content");
 
-			// Instantiate begin and end of java.util.Date type,for accepting
-			// transformed beginTime and endTime
+			// 创建java.util.Date数据类型的对象
 			Date begin = new Date();
 			Date end = new Date();
 
-			// Define a date format object, transform the time of String type
-			// into java.util.Date data type
+			// 定义一个日期格式对象，将时间字符串转换
+			// 到 java.util.Date数据类型
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			try {
 				begin = dateFormat.parse(beginTime);
 				end = dateFormat.parse(endTime);
 
-				// Build a Contract object and assign value for the object's
-				// attribute
+				// 创建合同对象来保存属性
 				Contract contract = new Contract();
 				contract.setId(conId);
 				contract.setName(name);
@@ -69,37 +67,37 @@ public class DgContractServlet extends HttpServlet {
 				contract.setContent(content);
 				contract.setUserId(userId);
 
-				// Initialize contractService
+				// 初始化合同服务对象
 				ContractService contractService = new ContractService();
-				// Call business logic layer to finalize contract
+				// 调用逻辑层来 定稿合同
 				contractService.finalize(contract);
 
-				// After finalized contract,redirect to pending contract page
+				// 定稿后重定向到定稿前的页面
 				response.sendRedirect("toDdghtList");
 			} catch (ParseException e) {
 				e.printStackTrace();
-				// Initialize prompt message
+				// 初始化message
 				String message = "";
 				message = "Please enter the correct date format!";
-				// Save message to request
+				// 保存message到请求
 				request.setAttribute("message", message);
-				// Forward to finalized contract page
+				// forward到定稿页面
 				request.getRequestDispatcher("/dgContract.jsp").forward(
 						request, response);
 			} catch (AppException e) {
 				e.printStackTrace();
-				// Redirect to the exception page
+				// 重定向跳转到异常页面
 				response.sendRedirect("toError");
 			}
 		}
 	}
 
 	/**
-	 * Process GET requests
+	 * 处理GET请求
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Call doPost() to process request
+		// 调用doPost方法来处理请求
 		this.doPost(request, response);
 	}
 }

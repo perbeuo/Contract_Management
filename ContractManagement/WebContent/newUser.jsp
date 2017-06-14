@@ -13,7 +13,7 @@
 				<%
 					String name = (String) session.getAttribute("userName");
 				%>
-				<span>Hello:<%=name%>,Welcome to contract management system!
+				<span>您好:<%=name%>,欢迎来到数据库管理系统!
 					[<a href="logout" target="_top">Logout</a>]</span>
 			</div>
 			<h1>
@@ -23,15 +23,14 @@
 
 		<div class="content">
 			<p>
-				You hava no contract operation privileges,<br />
-				please waiting for the administrator to configure permissions for
-				you!
+				您没有合同操作权限,<br />
+				请等待管理员为您分配权限！
 				<br />
 				<%
 					Date now = new Date();
 					SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 				%>
-				Current time：<%=sdf.format(now)%>
+				登陆时间：<%=sdf.format(now)%>
 			</p>
 		</div>
 

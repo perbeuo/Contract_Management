@@ -26,24 +26,24 @@ public class ToAssignOperServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Set the request's character encoding
+		// 设定编码方式
 		request.setCharacterEncoding("UTF-8");
 		
-		// Declare session
+		// 声明会话
 		HttpSession session = null;
-		// Get session by using request
+		// 获得会话
 		session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
-		// If user is not login, jump to login page
+		// 如果用户没有登录则跳转到登陆界面
 		if (userId == null) {
 			response.sendRedirect("toLogin");
 		}else {
-			// Get contract id
+			// 获得合同ID
 			int conId = Integer.parseInt(request.getParameter("conId"));
 			
 			try {
-			// Initialize contractService
+			// 初始化合同服务对象
 			ContractService contractService = new ContractService();
 			// Query contract information according to contract id
 			Contract contract = contractService.getContract(conId);
@@ -62,7 +62,7 @@ public class ToAssignOperServlet extends HttpServlet {
 			// Get user list according to role id
 			userList = userService.getUserListByRoleId(roleId);
 			
-			// Save contract to request
+			// 将合同传递到request
 			request.setAttribute("contract", contract);
 			// Save userList to request
 			request.setAttribute("userList", userList);
@@ -71,18 +71,18 @@ public class ToAssignOperServlet extends HttpServlet {
 					response);
 			} catch (AppException e) {
 				e.printStackTrace();
-				//Redirect to the exception page
+				//重定向跳转到异常页面
 				response.sendRedirect("toError");
 			}
 		}
 	}
 
 	/**
-	 * Process GET requests
+	 * 处理GET请求
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Call doPost() to process request
+		// 调用doPost方法来处理请求
 		this.doPost(request, response);
 	}
 }

@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>List of contract to be assigned</title>
+		<title>待分配合同列表</title>
 		<link href="css/style.css" rel="stylesheet" media="screen"
 			type="text/css" />
 		<!-- Use JavaScript script to open a new window display information when preview-->
@@ -17,13 +17,13 @@
 
 	<body>
 		<div class="mtitle">
-			Contracts to be assigned
+			待分配合同
 		</div>
 		
 		<div class="search">
 			<form>
-				Search contract to be assigned
-				<input type="text" value="Please enter contract name..." 
+				搜索待分配合同
+				<input type="text" value="" 
 					name="name" onFocus="this.value=''"/>
 				&nbsp;&nbsp;
 				<input type="submit" value="Search" class="search-submit"/> <br />
@@ -34,13 +34,13 @@
 		  <table>
 			<tr>
 				<th>
-					Contract name
+					合同名
 				</th>
 				<th class="th1">
-					Draft time
+					起草时间
 				</th>
 				<th class="th1">
-					Operation
+					操作
 				</th>
 			</tr>
 			<%
@@ -57,7 +57,7 @@
 				<td>
 					<a href="toAssignOper?conId=<%=cbm.getConId()%>">
 						<img src="images/cog_edit.png"  alt="Assign" />
-						Assign
+						分配
 					</a>
 				</td>
 			</tr>
@@ -77,7 +77,7 @@
 			<a href="#"><img src="images/page/last.png"  alt="" /></a>&nbsp;
 					
 			<span class="pageinfo">
-				Total&nbsp;<strong>2</strong>&nbsp;pages&nbsp;<strong>13</strong>&nbsp;records
+				
 			</span>	
 		</div>
 	</body>

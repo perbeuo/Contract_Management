@@ -24,29 +24,29 @@ public class ShowHQOpinionServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Set the request's character encoding
+		// 设定编码方式
 		request.setCharacterEncoding("UTF-8");
 
-		// Declare session
+		// 声明会话
 		HttpSession session = null;
-		// Get session by using request
+		// 获得会话
 		session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
 
-		// If user is not login, jump to login page
+		// 如果用户没有登录则跳转到登陆界面
 		if (userId == null) {
 			response.sendRedirect("toLogin");
 		} else {
-			//  Get contract id
+			//  获得合同ID
 			int conId = Integer.parseInt(request.getParameter("conId"));
 			
 			try {
-				// Initialize contractService
+				// 初始化合同服务对象
 				ContractService contractService = new ContractService();
 				//CSignatureOpinion CSignatureOpinion = new CSignatureOpinion();
 				// Initialize csOpinionList
 				List<CSignatureOpinion> csOpinionList = new ArrayList<CSignatureOpinion>();
-				// Call business logic layer to get countersign opinion
+				// 调用逻辑层来 get countersign opinion
 				csOpinionList = contractService.showHQOpinion(conId);
 				// Save conProcessList to request
 				request.setAttribute("csOpinionList", csOpinionList);
@@ -55,18 +55,18 @@ public class ShowHQOpinionServlet extends HttpServlet {
 						response);
 			} catch (AppException e) {
 				e.printStackTrace();
-				// Redirect to the exception page
+				// 重定向跳转到异常页面
 				response.sendRedirect("toError");
 			}
 		}
 	}
 
 	/**
-	 * Process GET requests
+	 * 处理GET请求
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Call doPost() to process request
+		// 调用doPost方法来处理请求
 		this.doPost(request, response);
 	}
 

@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Assign operator</title>
+		<title>人员分配</title>
 		<link href="css/style.css" rel="stylesheet" media="screen"
 			type="text/css" />
 		<script type="text/javascript">
@@ -71,7 +71,7 @@
 			Contract contract = (Contract)request.getAttribute("contract");
 		%>
 		<div class="mtitle">
-			Assign operator: <%=contract.getName()%>
+			分配操作者: <%=contract.getName()%>
 		</div>
 		<%
 			List<User> userList = (List<User>)request.getAttribute("userList");
@@ -81,12 +81,12 @@
 			<input type="hidden" name="conId" value="<%=contract.getId()%>">
 			<h3>
 				<img src="images/cog_edit.png"  alt="Assign countersign people" />
-				Assign countersign operator
+				分配会签操作者
 			</h3>
 			<table border="0" width="200" class="update"> 
 				<tr>
 					<td width="45%"> 
-						operator to be assigned: 
+						可分配人员: 
 						<select style="WIDTH:100%" multiple name="dfphqht" size="12">
 						    <%  
 						    	for (User user : userList) {
@@ -103,7 +103,7 @@
 					onclick="moveOption(document.assignOperForm.hqht, document.assignOperForm.dfphqht)"> 
 					</td> 
 					<td width="45%"> 
-						assigned operator:
+						已分配人员:
 						<select style="WIDTH:100%" multiple name="hqht" size="12"> 
 						</select> 
 					</td> 
@@ -112,12 +112,12 @@
 			<br />
 			<h3>
 				<img src="images/cog_edit.png"  alt="Assign approver" />
-				Assign approver
+				分配审批员
 			</h3>
 			<table border="0" width="400"  class="update"> 
 				<tr>
 					<td width="45%"> 
-						operator to be assigned: 
+						待分配人员: 
 						<select style="WIDTH:100%" multiple name="dfpspht" size="12"> 
 							 <%  
 						    	for (User user : userList) {
@@ -134,7 +134,7 @@
 					onclick="moveOption(document.assignOperForm.spht, document.assignOperForm.dfpspht)"> 
 					</td> 
 					<td width="45%"> 
-						assigned operator:
+						已分配人员:
 						<select style="WIDTH:100%" multiple name="spht" size="12"> 
 						</select> 
 					</td> 
@@ -143,12 +143,12 @@
 			<br />
 			<h3>
 				<img src="images/cog_edit.png"  alt="Assign signer" />
-				Assign signer
+				分配签订者
 			</h3>
 			<table border="2" width="400"  class="update"> 
 				<tr>
 					<td width="45%"> 
-						operator to be assigned: 
+						待分配人员: 
 						<select style="WIDTH:100%" multiple name="dfpqdht" size="12"> 
 							 <%  
 						    	for (User user : userList) {
@@ -165,7 +165,7 @@
 					onclick="moveOption(document.assignOperForm.qdht, document.assignOperForm.dfpqdht)"> 
 					</td> 
 					<td width="45%"> 
-						assigned operator:
+						已分配人员:
 						<select style="WIDTH:100%" multiple name="qdht" size="12"> 
 						</select> 
 					</td> 

@@ -12,77 +12,77 @@ import model.Role;
 import service.UserService;
 import utils.AppException;
 /**
- * Servlet that process user login 
+ * 处理用户登录的Servlet 
  */
 public class LoginServlet extends HttpServlet {
 
 	/**
-	 * Process login request with POST mode
+	 * 处理登录请求
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Set request's character encoding
+		// 设定编码方式
 		request.setCharacterEncoding("UTF-8");
-		// Get user name and password
+		// 获得用户名和密码
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 
-		// Initialize prompt message
+		// 初始化message
 		String message = "";
 		
 		int userId = -1;
 		try {
-			// Initialize the user business logic class
+			// 初始化逻辑层
 			UserService userService = new UserService();
-			// Call business logic layer for user login
+			// 调用逻辑层处理登录
 			userId = userService.login(name, password);
-			if (userId > 0) { // Login successfully  
-				// Declare session
+			if (userId > 0) { // 登陆成功
+				// 声明会话
 				HttpSession session = null;
-				// Get session by using request
+				// 获得会话
 				session = request.getSession();
-				// Save userId and user name into session
+				// 保存用户ID和密码到会话
 				session.setAttribute("userId", userId);
 				session.setAttribute("userName", name);
-				// Declare role
+				// 声明角色
 				Role role = null;
-				//Call business logic layer to get role's information
+				//调用逻辑层来 获得角色信息
 				role = userService.getUserRole(userId);
-				// Process page jump according to the user's role
+				// 通过判断角色身份跳转到不同页面
 				if ( role == null) {
-					//Redirect to new user page
+					//重定向到新用户界面
 					response.sendRedirect("toNewUser");
 				} else if (role.getName().equals("admin")) {
-					//Redirect to administrator page
+					//重定向到管理员界面
 					response.sendRedirect("toAdmin");
 				} else if (role.getName().equals("operator")) {
-					//Redirect to operator page 
+					//重定向到操作者界面
 					response.sendRedirect("toOperator");
 				}
-			} else {// Login failed
-				// Set prompt message
-				message = "Incorrect user name or password!";
-				request.setAttribute("message", message); // Save prompt message into request
-				// Save user name into request
+			} else {// 登陆失败
+				// 设置message信息
+				message = "用户名或密码错误！";
+				request.setAttribute("message", message); // 保存message到请求
+				// 保存用户名到请求
 				request.setAttribute("userName", name);	
-				// Forward to login page
+				// Forward 到登陆页面
 				request.getRequestDispatcher("/login.jsp").forward(request,
 						response);
 			}
 		} catch (AppException e) {
 			e.printStackTrace();
-			// Redirect to exception page
+			// 重定向跳转到异常页面
 			response.sendRedirect("toError");
 		}
 		
 	}
 
 	/**
-	 * Process GET requests
+	 * 处理GET请求
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Call doPost() to process request
+		// 调用doPost方法来处理请求
 		this.doPost(request, response);
 	}
 

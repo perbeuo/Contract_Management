@@ -22,13 +22,13 @@ public class ToNewUserServlet extends HttpServlet {
 		//Call doGet() to process request
 		request.setCharacterEncoding("UTF-8");
 		
-		// Declare session
+		// 声明会话
 		HttpSession session = null;
-		// Get session by using request object
+		// 获得会话 object
 		session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
-		// If user is not login, jump to login page
+		// 如果用户没有登录则跳转到登陆界面
 		if (userId == null) {
 			response.sendRedirect("toLogin");
 		}else {
@@ -38,7 +38,7 @@ public class ToNewUserServlet extends HttpServlet {
 	}
 
 	/**
-	 * Process the GET requests,output new user page
+	 * 处理GET请求,output new user page
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

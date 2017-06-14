@@ -13,63 +13,63 @@ import service.ContractService;
 import utils.AppException;
 
 /**
- * Servlet for countersign contract
+ * 用来会签合同的Servlet
  */
 public class AddHQOpinionServlet extends HttpServlet {
 
 	/**
-	 * Process Post requests of countersign contract
+	 * 处理Post会签请求
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Set the request's character encoding
+		// 设定编码方式
 		request.setCharacterEncoding("UTF-8");
 		
-		// Declare session
+		// 声明会话
 		HttpSession session = null;
-		// Get session by using request
+		// 获得会话
 		session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
-		// If user is not login, jump to login page
+		// 如果用户没有登录则跳转到登陆界面
 		if (userId == null) {
 			response.sendRedirect("toLogin");
 		} else {
 			
-			// Get contract id
+			// 获得合同ID
 			int conId = Integer.parseInt(request.getParameter("conId"));
-			// Get countersign opinion
+			// 获得会签意见
 			String content = request.getParameter("content");
 			
-			// Instantiate conProcess object for  encapsulates countersign information
+			// 创建ConProcess对象来封装信息
 			ConProcess conProcess = new ConProcess();
 			conProcess.setConId(conId);
 			conProcess.setUserId(userId);
 			conProcess.setContent(content);
 			
 			try {
-				// Initialize contractService
+				// 初始化合同服务对象
 				ContractService contractService = new ContractService();
-				// Call business logic layer to do contract countersign
+				// 调用逻辑层来处理会签
 				contractService.counterSign(conProcess);
 				
-				// After countersigned,redirect to page of contract to be countersigned
+				// 会签后重定向到提示已会签的界面
 				response.sendRedirect("toDhqhtList");
 
 			} catch (AppException e) {
 				e.printStackTrace();
-				// Redirect to the exception page
+				// 重定向跳转到异常页面
 				response.sendRedirect("toError");
 			}
 		}
 	}
 
 	/**
-	 * Process GET requests
+	 * 处理GET请求
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Call doPost() to process request
+		// 调用doPost方法来处理请求
 		this.doPost(request, response);
 	}
 }

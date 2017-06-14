@@ -11,63 +11,62 @@ import model.User;
 import service.UserService;
 import utils.AppException;
 /**
- * Handle the registration request
+ * 处理注册请求的Servlet
  */
 public class RegisterServlet extends HttpServlet {
 
 	/**
-	 * Handle the registration request
+	 * 处理注册请求
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//Set the request's character encoding
+		//设定编码方式
 		request.setCharacterEncoding("UTF-8");
-		//Get the user's name, password and repeat password
+		//获得用户名和密码
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 		
-		//Declare the identifies of handling registration
+		//声明代表注册的flag
 		boolean flag = false;
-		//Initialize the prompt message 
+		//初始化message
 		String message = "";
 		try {
-			//Instantiate the object of entity class User  
+			//初始化用户实体
 			User user = new User();
-			// Initialize the user business logic class
+			// 初始化逻辑层
 			UserService userService = new UserService();
-			// Encapsulate the user information to the user object
+			// 封装用户信息
 			user.setName(name);
 			user.setPassword(password);
-			// Call business logic layer for user registration 
+			// 调用逻辑层处理
 			flag = userService.register(user);
 			if (flag) {
-				// After registration Successful, redirect to the login page
+				// 注册成功后重定向到登录页面
 				message = "Registration Succeed";
 				request.setAttribute("message", message);
-				//response.sendRedirect("toLogin");
 				request.getRequestDispatcher("/toLogin").forward(request,
 						response);
 			} else {
-				// Set prompt message
+				// 初始化message
 				message = "Registration failed";
 				request.setAttribute("message", message); // Save prompt message into request 
-				// Forward to the registration page
+				// Forward 到注册页面
 				request.getRequestDispatcher("/register.jsp").forward(request,
 						response);
 			}
 		} catch (AppException e) {
 			e.printStackTrace();
-			// Redirect to the exception page
+			// 重定向跳转到异常页面
 			response.sendRedirect("toError");
 		}
 	}
 
 	/**
-	 * Handle the registration request
+	 * 处理注册请求
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//Call doPost() to handle request
+		//调用doPost处理请求
 		doPost(request, response);
 	}
 	

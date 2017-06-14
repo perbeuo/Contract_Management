@@ -42,40 +42,36 @@
 					<table>
 						<tr>
 							<td class="title" colspan="2">
-								User register
+								用户注册
 							</td>
 						</tr>
 						<tr>
 							<td width="120" align="center">
-								User name:
+								用户名:
 							</td>
 							<td>
 								<input type="text" name="name" id="name" value="" />
 							</td>
 						</tr>
 						<tr>
-							<td class="info" colspan="2">
-								User name must begin with a letter, at least four words(letters, Numbers, underscores).
-							</td>
+						
 						</tr>
 
 						<tr>
 							<td align="center">
-								Password:
+								密码:
 							</td>
 							<td>
 								<input type="password" name="password" id="password" value="" />
 							</td>
 						</tr>
 						<tr>
-							<td class="info" colspan="2">
-								Password can not be too simple, at least contain six words; Recommend to use numbers and letters mixed arrangement, case-insensitive.
-							</td>
+							
 						</tr>
 
 						<tr>
 							<td align="center">
-								Repeat Password:
+								重复密码:
 							</td>
 							<td>
 								<input type="password" name="password2" id="password2" value="" />
@@ -83,7 +79,7 @@
 						</tr>
 						<tr>
 							<td class="info" colspan="2">
-								Repeat password and password should keep consistent!
+								重复密码和密码要保持一致
 							</td>
 						</tr>
 						<tr>
@@ -99,7 +95,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<input type="submit" value="Submit" class="button" onclick="return check()"/>
+								<input type="submit" value="提交" class="button" onclick="return check()"/>
 							</td>
 						</tr>
 					</table>

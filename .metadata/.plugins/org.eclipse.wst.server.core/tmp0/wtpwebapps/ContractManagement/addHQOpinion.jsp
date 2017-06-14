@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Countersign contract</title>
+		<title>会签合同</title>
 		<link href="css/style.css" rel="stylesheet" media="screen"
 			type="text/css" />
 		<script type="text/javascript">
@@ -21,7 +21,7 @@
 
 	<body>
 		<div class="mtitle">
-			Countersign contract
+			会签合同
 		</div>
 		<br />
 		<form name="addHQOpinionForm" action="addHQOpinion" method="post">
@@ -31,11 +31,11 @@
 			<input type="hidden" name="conId" value="<%=contract.getId()%>">
 			<table class="update" style="width:680px;">	
 				<tr height="28">
-					<td width="180px">Contract name:</td>
+					<td width="180px">合同名:</td>
 					<td><%=contract.getName()%></td>
 				</tr>
 				<tr>
-					<td>Countersign opinion:</td>	
+					<td>会签意见:</td>	
 					<td>
 						<textarea rows="10" cols="40" id="content" name="content" style="width:400px;height:100px;resize: none;"></textarea>
 					</td>

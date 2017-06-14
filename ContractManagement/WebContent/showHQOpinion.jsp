@@ -11,7 +11,7 @@
 
 	<body>
 		<div class="mtitle">
-			Countersign opinion
+			会签意见
 		</div>
 		
 		<br />
@@ -19,10 +19,10 @@
 			<table>
 				<tr>
 					<th width="100">
-						Operator
+						操作员
 					</th>
 					<th  width="600">
-						Opinion
+						意见
 					</th>
 				</tr>
 				<%

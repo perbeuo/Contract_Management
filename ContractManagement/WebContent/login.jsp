@@ -11,12 +11,12 @@
 				var name = document.getElementById('name');
 				var password = document.getElementById('password');
 				if(name.value == ""){
-					alert("User name can not be empty!");
+					alert("用户名不能为空!");
 					name.focus();
 					return false;
 				}
 				if(password.value == ""){
-					alert("Password can not be empty!");
+					alert("密码不能为空!");
 					password.focus();
 					return false;
 				}
@@ -43,12 +43,12 @@
 					<table>
 						<tr>
 							<td class="title" colspan="3">
-								User Login
+								用户登录
 							</td>
 						</tr>
 						<tr>
 							<td width="60">
-								User name:
+								用户名:
 							</td>
 							<!-- Get user name-->
 							<%
@@ -66,7 +66,7 @@
 
 						<tr>
 							<td>
-								Password：
+								密码：
 							</td>
 							<td>
 								<input type="password" name="password" id="password" value="" />
@@ -86,7 +86,7 @@
 						</tr>
 						<tr>
 							<td colspan="3">
-								<input type="submit" value="Login" class="button" onclick="return check()"/>
+								<input type="submit" value="登录" class="button" onclick="return check()"/>
 							</td>
 						</tr>
 					</table>

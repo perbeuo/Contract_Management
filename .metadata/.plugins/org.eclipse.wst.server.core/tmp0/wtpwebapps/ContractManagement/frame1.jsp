@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Contract Management - Administrator page</title>
+		<title>合同管理系统 - 管理员界面</title>
 		<link href="css/frame.css" rel="stylesheet" 
 			type="text/css" />
 	</head>
@@ -20,7 +20,7 @@
 	<!-- Set prompt message for browser that does not support Frame structure-->
 	<noframes>
 		<body>
-			Your browser does not support frame structure!
+			您的浏览器不支持界面结构！
 		</body>
 	</noframes>
 </html>

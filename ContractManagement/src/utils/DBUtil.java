@@ -39,7 +39,7 @@ public class DBUtil {
 			// Create a database connection
 			conn = DriverManager.getConnection(url, user, password);
 			// If successful get the database connection, print a success message
-			System.out.println("connect success!");
+			//System.out.println("connect success!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

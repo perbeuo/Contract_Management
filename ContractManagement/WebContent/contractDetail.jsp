@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Contract details</title>
+		<title>合同信息</title>
 		<link href="css/style.css" rel="stylesheet" media="screen"
 			type="text/css" />
 	</head>
@@ -37,20 +37,20 @@
 			<div class="pfooter">
 				<ul>
 					<li>
-						<a target="_blank" href="#">Contract Management System</a>
+						<a target="_blank" href="#">合同管理系统</a>
 					</li>
 					<li>
 						｜
 					</li>
 					<li>
-						<a target="_blank" href="#">Help</a>
+						<a target="_blank" href="#">帮助</a>
 					</li>
 				</ul>
 
 				<p>
-					Copyright&nbsp;&copy;&nbsp;Ruanko COE&nbsp;
-					<a href="http://www.ruanko.com" title="www.ruanko.com" target="_blank"><strong>www.ruanko.com</strong>
-					</a>&nbsp;Copyright Reserved
+					Copyright&nbsp;&copy;&nbsp;OAO&nbsp;
+					<strong>学渣小组</strong>
+					&nbsp;Copyright Reserved
 				</p>
 			</div>
 		</div>

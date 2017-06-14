@@ -13,33 +13,33 @@ import utils.AppException;
 import utils.Constant;
 
 /**
- * Servlet for assign contract
+ * 用来分配合同的Servlet
  */
 public class AssignOperServlet extends HttpServlet {
 
 	/**
-	 * Process result of assign contrct
+	 * 处理分配合同的结果
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Set the request's character encoding
+		// 设定编码方式
 		request.setCharacterEncoding("UTF-8");
 
-		// Declare session
+		// 声明会话
 		HttpSession session = null;
-		// Get session by using request
+		// 获得会话
 		session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
 
-		// If user is not login, jump to login page
+		// 如果用户没有登录则跳转到登陆界面
 		if (userId == null) {
 			response.sendRedirect("toLogin");
 		} else {
 
 			/*
-			 * Get information of assign contract
+			 * 获得待会签合同信息
 			 */
-			// Get Contract id
+			// 获得合同ID
 			int conId = Integer.parseInt(request.getParameter("conId"));
 			// Get assigned cuntersign people's id
 			String[] hqht = request.getParameterValues("hqht");
@@ -49,46 +49,45 @@ public class AssignOperServlet extends HttpServlet {
 			String[] qdht = request.getParameterValues("qdht");
 
 			try {
-				// Initialize contractService
+				// 初始化合同服务对象
 				ContractService contractService = new ContractService();
 				/*
-				 * Call business logic layer to distributed contract
+				 * 调用逻辑层来分配合同
 				 */
-				// Assigned cuntersign people
+				// 分配会签者
 				for (String hq : hqht) {
 					contractService.distribute(conId, Integer.parseInt(hq),
 							Constant.PROCESS_CSIGN);
 				}
 
-				// Assigned approver
+				// 分配审批者
 				for (String sp : spht) {
 					contractService.distribute(conId, Integer.parseInt(sp),
 							Constant.PROCESS_APPROVE);
 				}
 
-				// Assigned signer
+				// 分配签订者
 				for (String qd : qdht) {
 					contractService.distribute(conId, Integer.parseInt(qd),
 							Constant.PROCESS_SIGN);
 				}
 
-				// After complete assignment,redirect to page of to be
-				// distributed
+				// 完成分配后，重定向到之前的页面
 				response.sendRedirect("toDfphtList");
 			} catch (AppException e) {
 				e.printStackTrace();
-				// Redirect to exception page
+				// 重定向跳转到异常页面
 				response.sendRedirect("toError");
 			}
 		}
 	}
 
 	/**
-	 * Process GET requests
+	 * 处理GET请求
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Call doPost() to process request
+		// 调用doPost方法来处理请求
 		this.doPost(request, response);
 	}
 

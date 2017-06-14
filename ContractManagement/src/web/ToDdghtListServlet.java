@@ -24,26 +24,26 @@ public class ToDdghtListServlet extends HttpServlet{
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {	
-		// Set the request's character encoding
+		// 设定编码方式
 		request.setCharacterEncoding("UTF-8");
 		
-		//  Declare session
+		//  声明会话
 		HttpSession session = null;
-		// Get session by using request
+		// 获得会话
 		session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
-		// If user is not login, jump to login page
+		// 如果用户没有登录则跳转到登陆界面
 		if (userId == null) {
 			response.sendRedirect("toLogin");
 		}else {
 			
 			try {
-				// Initialize contractService
+				// 初始化合同服务对象
 				ContractService contractService = new ContractService();
 				//  Initialize contractList
 				List<ConBusiModel> contractList = new ArrayList<ConBusiModel>();
-				// Call business logic layer to get list of contract to be finalized
+				// 调用逻辑层来 get list of contract to be finalized
 				contractList = contractService.getDdghtList(userId);
 				// Save contractList to request
 				request.setAttribute("contractList", contractList);
@@ -51,18 +51,18 @@ public class ToDdghtListServlet extends HttpServlet{
 				request.getRequestDispatcher("/ddghtList.jsp").forward(request, response);
 			} catch (AppException e) {
 				e.printStackTrace();
-				// Redirect to the exception page
+				// 重定向跳转到异常页面
 				response.sendRedirect("toError");
 			}
 		}
 	}
 	
 	/**
-	 * Process GET requests
+	 * 处理GET请求
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Call doPost() to process request
+		// 调用doPost方法来处理请求
 		this.doPost(request, response);
 	}
 

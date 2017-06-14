@@ -11,13 +11,13 @@
 		<div class="footer">
 			<ul>
 				<li>
-					<a target="_blank" href="#">Contract Management System</a>
+					<a target="_blank" href="#">合同管理系统</a>
 				</li>
 				<li>
 					｜
 				</li>
 				<li>
-					<a target="_blank" href="#">Help</a>
+					<a target="_blank" href="#">帮助</a>
 				</li>
 			</ul>
 

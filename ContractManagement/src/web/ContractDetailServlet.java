@@ -13,56 +13,56 @@ import service.ContractService;
 import utils.AppException;
 
 /**
- * Servlet for checking contract details 
+ * 用来查询合同信息的Servlet
  */
 public class ContractDetailServlet extends HttpServlet {
 
 	/**
-	 * Jump to contract details page
+	 * 跳转到合同信息页面
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Set the request's character encoding
+		// 设定编码方式
 		request.setCharacterEncoding("UTF-8");
 		
-		// Declare session
+		// 声明会话
 		HttpSession session = null;
-		// Get session by using request
+		// 获得会话
 		session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
-		// If user is not login, jump to login page
+		// 如果用户没有登录则跳转到登陆界面
 		if (userId == null) {
 			response.sendRedirect("toLogin");
 		} else {
 
-			// Get contract id
+			// 获得合同ID
 			int conId = Integer.parseInt(request.getParameter("conId"));
 
 			try {
-				// Initialize contractService
+				// 初始化合同服务对象
 				ContractService contractService = new ContractService();
-				// Query contract details according to contract id
+				// 根据合同ID查询合同信息
 				ConDetailBusiModel conDetailBusiModel = contractService.getContractDetail(conId);
-				// Save contract to request
+				// 将合同传递到request
 				request.setAttribute("conDetailBusiModel", conDetailBusiModel);
-				// Forward to countersign page
+				// forward到会签页面
 				request.getRequestDispatcher("/contractDetail.jsp").forward(
 						request, response);
 			} catch (AppException e) {
 				e.printStackTrace();
-				// Redirect to the exception page
+				// 重定向跳转到异常页面
 				response.sendRedirect("toError");
 			}
 		}
 	}
 
 	/**
-	 * Process GET requests
+	 * 处理GET请求
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Call doPost() to process request
+		// 调用doPost方法来处理请求
 		this.doPost(request, response);
 	}
 }

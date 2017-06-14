@@ -13,12 +13,10 @@
 				<%
 					String userName = (String) session.getAttribute("userName");
 				%>
-				<span>Hello:<%=userName%>，Welcome to Contract Management System [<a href="logout"
-					target="_top">Logout</a>]</span>
+				<span>您好:<%=userName%>，欢迎使用合同管理系统 [<a href="logout"
+					target="_top">退出</a>]</span>
 			</div>
-			<h1>
-				<img src="images/logo_title.png" alt="Contract Management System" />
-			</h1>
+			
 		</div>
 	</body>
 </html>

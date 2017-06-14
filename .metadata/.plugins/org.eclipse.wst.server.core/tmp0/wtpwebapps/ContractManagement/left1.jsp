@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Contract Management System - Administrator menu bar</title>
+	<title>合同管理系统 - 管理员菜单栏</title>
 	<link href="css/frame.css" rel="stylesheet" type="text/css" />
   </head>
   
@@ -12,39 +12,33 @@
 		
 		<dl>
 			<dt>
-				System Management
+				系统管理
 			</dt>
 			<dd>
-				<a href="#">User Management</a>
+				<a href="#">用户管理</a>
 			</dd>
 			<dd>
-				<a href="#">Role Management</a>
+				<a href="#">角色管理</a>
 			</dd>		
 			<dd>
-				<a href="#">Configure Permission</a>
-			</dd>
-			<dd>
-				<a href="#">Log Management</a>
+				<a href="#">日志管理</a>
 			</dd>	
 		</dl>
 		<dl>
 			<dt>
-				Contract Management
+				合同管理
 			</dt>
 			<dd>
-				<a href="toDfphtList" target="main">Process Configuration</a>
+				<a href="toDfphtList" target="main">分配合同</a>
 			</dd>
 			<dd>
-				<a href="#">Assigned Contract</a>
+				<a href="#">查询进度</a>
 			</dd>
 			<dd>
-				<a href="#">Query Process</a>
+				<a href="#">合同信息</a>
 			</dd>
 			<dd>
-				<a href="#">Contract Info</a>
-			</dd>
-			<dd>
-				<a href="#">Customer Info</a>
+				<a href="#">客户信息</a>
 			</dd>
 		</dl>
 	</div>
