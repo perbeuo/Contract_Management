@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link href="css/style.css" rel="stylesheet" media="screen"
 			type="text/css" />
-		<title>待会签合同列表</title>
+		<title>已定稿合同列表</title>
 		<!-- Use JavaScript script to open a new window display information when preview-->
 		<script>
 			function preview(url) {
@@ -17,12 +17,12 @@
 
 	<body>
 		<div class="mtitle">
-			待会签合同
+			已定稿合同
 		</div>
 		
 		<div class="search">
 			<form>
-				查询待会签合同:
+				查找已定稿合同
 				<input value="" />
 				&nbsp;&nbsp;
 				<input type="submit" value="Search" class="search-submit"/> <br />
@@ -36,9 +36,9 @@
 					合同名
 				</th>
 				<th class="th1">
-					起草时间
+					定稿时间
 				</th>
-				<th class="th2">
+				<th width="270px">
 					操作
 				</th>
 			</tr>
@@ -51,13 +51,14 @@
 					<a href="javascript:preview('contractDetail?conId=<%=cbm.getConId()%>')"><%=cbm.getConName()%></a>
 				</td>
 				<td>
-					<%=cbm.getDrafTime()%>
+					<%=cbm.getFinalTime()%>
 				</td>
 				<td>
-					<a href="toAddHQOpinion?conId=<%=cbm.getConId()%>">
-						<img src="images/icon-edit.png"  alt="Countersign" />
-						 会签
-					</a>
+					<a href="showHQOpinion?conId=<%=cbm.getConId()%>">
+						<img src="images/information.png"  alt="Countersign opinion" />
+						会签意见
+					</a> 
+					&nbsp;
 				</td>
 			</tr>
 			<%} %>
@@ -74,7 +75,7 @@
 			<a href="#"><img src="images/page/next.png"  alt="" /></a>&nbsp;
 			<a href="#"><img src="images/page/last.png"  alt="" /></a>&nbsp;
 					
-			
+	
 		</div>
 	</body>
 </html>

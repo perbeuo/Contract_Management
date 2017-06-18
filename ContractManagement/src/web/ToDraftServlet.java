@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet for accessing draft contract page
+ * 进入起草合同页面的Servlet 
  */
 public class ToDraftServlet extends HttpServlet {
 
 	/**
-	 * Jump to draft contract page
+	 * 跳转到起草合同页面
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -23,7 +23,7 @@ public class ToDraftServlet extends HttpServlet {
 		
 		// 声明会话
 		HttpSession session = null;
-		// 获得会话 object
+		// 获得会话 
 		session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
@@ -31,7 +31,7 @@ public class ToDraftServlet extends HttpServlet {
 		if (userId == null) {
 			response.sendRedirect("toLogin");
 		}else {
-			// Forward to draft page
+			// Forward到起草合同页面
 			request.getRequestDispatcher("/addContract.jsp").forward(request, response);
 		}
 	}

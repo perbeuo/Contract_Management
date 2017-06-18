@@ -15,12 +15,12 @@ import service.ContractService;
 import utils.AppException;
 
 /**
- * 进入待定稿合同页面
+ * 进入已定稿合同页面
  */
-public class ToDdghtListServlet extends HttpServlet{
+public class ToYdghtListServlet extends HttpServlet{
 
 	/**
-	 * 跳转到待定稿合同页面
+	 * 跳转到已定稿合同页面
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {	
@@ -43,12 +43,12 @@ public class ToDdghtListServlet extends HttpServlet{
 				ContractService contractService = new ContractService();
 				//  初始化 contractList
 				List<ConBusiModel> contractList = new ArrayList<ConBusiModel>();
-				// 调用逻辑层来获得待定稿合同
-				contractList = contractService.getDdghtList(userId);
+				// 调用逻辑层来获得已定稿合同
+				contractList = contractService.getYdghtList(userId);
 				// 保存 contractList到request
 				request.setAttribute("contractList", contractList);
-				// Forward到待定稿合同页面
-				request.getRequestDispatcher("/ddghtList.jsp").forward(request, response);
+				// Forward到已定稿合同页面
+				request.getRequestDispatcher("/ydghtList.jsp").forward(request, response);
 			} catch (AppException e) {
 				e.printStackTrace();
 				// 重定向跳转到异常页面

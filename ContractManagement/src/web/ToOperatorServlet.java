@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet for accessing contract operator page
+ * 进入合同操作员页面的Servlet 
  */
 public class ToOperatorServlet extends HttpServlet {
 
 	/**
-	 * Jump to contract operator page
+	 * 跳转到操作员页面
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -23,15 +23,15 @@ public class ToOperatorServlet extends HttpServlet {
 		
 		// 声明会话
 		HttpSession session = null;
-		// 获得会话 object
+		// 获得会话 
 		session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
-		// If the user is not loggin, then jump to login page
+		//  如果用户没有登录则跳转到登陆界面
 		if (userId == null) {
 			response.sendRedirect("toLogin");
 		}else {
-			// Forward to the contract operator page
+			// Forward到合同操作员页面
 			request.getRequestDispatcher("/frame2.jsp").forward(request, response);
 		}
 	}

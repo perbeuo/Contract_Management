@@ -267,4 +267,44 @@
 		<url-pattern>/showHQOpinion</url-pattern>
 	</servlet-mapping>
 	
+	<!-- Configure the access of ToYdghtListServlet -->
+	<servlet>
+		<servlet-name>toYdghtList</servlet-name>
+		<servlet-class>web.ToYdghtListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toYdghtList</servlet-name>
+		<url-pattern>/toYdghtList</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ToDshphtListServlet -->
+	<servlet>
+		<servlet-name>toDshphtList</servlet-name>
+		<servlet-class>web.ToDshphtListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toDshphtList</servlet-name>
+		<url-pattern>/toDshphtList</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ToAddSHPOpinionServlet -->
+	<servlet>
+		<servlet-name>toAddSHPOpinion</servlet-name>
+		<servlet-class>web.ToAddSHPOpinionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toAddSHPOpinion</servlet-name>
+		<url-pattern>/toAddSHPOpinion</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of AddSHPOpinionServlet -->
+	<servlet>
+		<servlet-name>addSHPOpinion</servlet-name>
+		<servlet-class>web.AddSHPOpinionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>addSHPOpinion</servlet-name>
+		<url-pattern>/addSHPOpinion</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

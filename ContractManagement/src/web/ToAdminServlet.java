@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet for accessing administrator page
+ * 进入管理员页面的Servlet 
  */
 public class ToAdminServlet extends HttpServlet {
 
 	/**
-	 * Jump to Administrator page
+	 * 跳转到管理员页面
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -23,14 +23,14 @@ public class ToAdminServlet extends HttpServlet {
 		
 		// 声明会话
 		HttpSession session = null;
-		// 获得会话 object
+		// 获得会话 
 		session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
-		// If the user is not logged in, then jump to the login page
+		// 如果用户没有登陆，则跳转到登录页面
 		if (userId == null) {
 			response.sendRedirect("toLogin");
 		}else {
-			// Forwarded to the contract administrator page
+			// Forwarded 到管理员页面
 			request.getRequestDispatcher("/frame1.jsp").forward(request, response);
 		}
 	}

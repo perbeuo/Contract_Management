@@ -6,23 +6,23 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link href="css/style.css" rel="stylesheet" media="screen"
 			type="text/css" />
-		<title>待会签合同列表</title>
+		<title>待审批合同列表</title>
 		<!-- Use JavaScript script to open a new window display information when preview-->
 		<script>
 			function preview(url) {
-				window.open(url,'Preview','resizable=no,toolbar=no,width=620,height=500,top=50,left=200');
+				window.open(url,'Preview','toolbar=no,scrollbars=yes,width=720,height=560,top=50,left=100');
 			}
 		</script>
 	</head>
 
 	<body>
 		<div class="mtitle">
-			待会签合同
+			待审批合同
 		</div>
 		
 		<div class="search">
 			<form>
-				查询待会签合同:
+				查询待审批合同:
 				<input value="" />
 				&nbsp;&nbsp;
 				<input type="submit" value="Search" class="search-submit"/> <br />
@@ -37,8 +37,8 @@
 				</th>
 				<th class="th1">
 					起草时间
-				</th>
-				<th class="th2">
+				</th>  
+				<th class="th1">
 					操作
 				</th>
 			</tr>
@@ -54,9 +54,9 @@
 					<%=cbm.getDrafTime()%>
 				</td>
 				<td>
-					<a href="toAddHQOpinion?conId=<%=cbm.getConId()%>">
-						<img src="images/icon-edit.png"  alt="Countersign" />
-						 会签
+					<a href="toAddSHPOpinion?conId=<%=cbm.getConId()%>">
+						<img src="images/icon-edit.png"  alt="Approve" />
+						审批
 					</a>
 				</td>
 			</tr>
@@ -74,7 +74,7 @@
 			<a href="#"><img src="images/page/next.png"  alt="" /></a>&nbsp;
 			<a href="#"><img src="images/page/last.png"  alt="" /></a>&nbsp;
 					
-			
+
 		</div>
 	</body>
 </html>

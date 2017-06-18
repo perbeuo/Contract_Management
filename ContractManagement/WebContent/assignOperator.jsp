@@ -71,7 +71,7 @@
 			Contract contract = (Contract)request.getAttribute("contract");
 		%>
 		<div class="mtitle">
-			分配操作者: <%=contract.getName()%>
+			待分配合同: <%=contract.getName()%>
 		</div>
 		<%
 			List<User> userList = (List<User>)request.getAttribute("userList");
@@ -175,8 +175,8 @@
 			<table width="400" class="update"> 
 				<tr>
 					<td colspan="2" style="text-align:center;">
-				<input type="submit" value="Submit" class="button" onclick="return check()"> &nbsp; &nbsp; &nbsp; 
-				<input type="reset" value="Reset" class="button">
+				<input type="submit" value="提交" class="button" onclick="return check()"> &nbsp; &nbsp; &nbsp; 
+				<input type="reset" value="重置" class="button">
 				</td>
 				</tr>
 			</table>

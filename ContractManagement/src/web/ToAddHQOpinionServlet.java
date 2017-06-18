@@ -13,12 +13,12 @@ import service.ContractService;
 import utils.AppException;
 
 /**
- * Servlet for accessing countersign page
+ * 进入会签界面的Servlet 
  */
 public class ToAddHQOpinionServlet extends HttpServlet {
 
 	/**
-	 * Jump to countersign page
+	 * 跳转到会签界面
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

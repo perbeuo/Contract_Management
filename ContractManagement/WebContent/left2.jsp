@@ -17,12 +17,6 @@
 					<a href="toDraft" target="main">起草合同</a>
 				</dd>
 				<dd>
-					<a href="toDdghtList" target="main">定稿合同</a>
-				</dd>
-				<dd>
-					<a href="#">已定稿合同</a>
-				</dd>
-				<dd>
 					<a href="#">查询进度</a>
 				</dd>
 			</dl>
@@ -39,10 +33,21 @@
 			</dl>
 			<dl>
 				<dt>
+					定稿
+				</dt>
+				<dd>
+					<a href="toDdghtList" target="main">定稿合同</a>
+				</dd>
+				<dd>
+					<a href="toYdghtList" target="main">已定稿合同</a>
+				</dd>
+			</dl>
+			<dl>
+				<dt>
 					审批
 				</dt>
 				<dd>
-					<a href="#">审批合同</a>
+					<a href="toDshphtList" target="main">审批合同</a>
 				</dd>
 				<dd>
 					<a href="#">已审批合同</a>

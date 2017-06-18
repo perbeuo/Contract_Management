@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Output exception user page
+ * 输出异常
  */
 public class ToErrorServlet extends HttpServlet {
 
 	/**
-	 * Process POST request, output exception user page
+	 * 处理POST请求, 输出异常
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -23,7 +23,7 @@ public class ToErrorServlet extends HttpServlet {
 	}
 
 	/**
-	 * Process GET request, output exception user page
+	 * 处理GET请求, 输出异常
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

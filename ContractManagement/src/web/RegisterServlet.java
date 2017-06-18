@@ -42,13 +42,13 @@ public class RegisterServlet extends HttpServlet {
 			flag = userService.register(user);
 			if (flag) {
 				// 注册成功后重定向到登录页面
-				message = "Registration Succeed";
+				message = "注册成功";
 				request.setAttribute("message", message);
 				request.getRequestDispatcher("/toLogin").forward(request,
 						response);
 			} else {
 				// 初始化message
-				message = "Registration failed";
+				message = "注册失败";
 				request.setAttribute("message", message); // Save prompt message into request 
 				// Forward 到注册页面
 				request.getRequestDispatcher("/register.jsp").forward(request,

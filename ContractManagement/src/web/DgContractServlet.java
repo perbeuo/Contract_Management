@@ -78,7 +78,7 @@ public class DgContractServlet extends HttpServlet {
 				e.printStackTrace();
 				// 初始化message
 				String message = "";
-				message = "Please enter the correct date format!";
+				message = "请输入正确的日期格式！";
 				// 保存message到请求
 				request.setAttribute("message", message);
 				// forward到定稿页面

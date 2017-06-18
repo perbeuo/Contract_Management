@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Process user's request, output the target page
+ * 处理用户请求, 输出注册页面
  */
 public class ToRegisterServlet extends HttpServlet {
 
 	/**
-	 * Process the POST requests, output the target page
+	 * 处理POST请求,  输出注册页面
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -23,7 +23,7 @@ public class ToRegisterServlet extends HttpServlet {
 	}
 
 	/**
-	 * 处理GET请求, output the target page
+	 * 处理GET请求,  输出注册页面
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Contract Management System - Login page</title>
+		<title>合同管理系统 - 登录页</title>
 		<link href="css/style.css" rel="stylesheet" media="screen"
 			type="text/css" />
 		<script type="text/javascript">

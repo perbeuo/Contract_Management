@@ -17,12 +17,12 @@ import service.UserService;
 import utils.AppException;
 
 /**
- * Servlet for accessing operator assignment page
+ * 进入分配操作员页面的Servlet
  */
 public class ToAssignOperServlet extends HttpServlet {
 
 	/**
-	 * Jump to operator assignment page
+	 * 跳转到分配操作员页面
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -45,28 +45,28 @@ public class ToAssignOperServlet extends HttpServlet {
 			try {
 			// 初始化合同服务对象
 			ContractService contractService = new ContractService();
-			// Query contract information according to contract id
+			// 根据id查询合同
 			Contract contract = contractService.getContract(conId);
 			
-			// Initialize userService
+			// 初始化userService
 			UserService userService = new UserService();
 			
 			/*
-			 * Need to get user list with "countersign", "approve", "sign" permissions 
-			 * Operator role have above rights, here using hard-coding way to set operator role's role id to 2,
-			 * RoleId = 2 corresponding to the role's primary key who have rights as above in contract rights table
+			 * 获得有 "countersign", "approve", "sign" 等权限的用户保存到userlist
+			 * 操作员有上述权限, 设置操作员的角色代码为2
+			 * RoleId = 2 对应有上述权限的人
 			 */
 			int roleId = 2;
-			// Initialize userList
+			// 初始化 userList
 			List<User> userList = new ArrayList<User>();
-			// Get user list according to role id
+			// 通过roleid获得用户
 			userList = userService.getUserListByRoleId(roleId);
 			
 			// 将合同传递到request
 			request.setAttribute("contract", contract);
-			// Save userList to request
+			// 保存userList到request
 			request.setAttribute("userList", userList);
-			// Forward to operator assignment page
+			// Forward 到分配操作员页面
 			request.getRequestDispatcher("/assignOperator.jsp").forward(request,
 					response);
 			} catch (AppException e) {

@@ -1,8 +1,6 @@
 package web;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,17 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.CSignatureOpinion;
+import model.ConProcess;
 import service.ContractService;
 import utils.AppException;
+import utils.Constant;
 
 /**
- * 显示会签意见的 Servlet 
+ * 审批合同的servlet
  */
-public class ShowHQOpinionServlet extends HttpServlet {
+public class AddSHPOpinionServlet extends HttpServlet {
 
 	/**
-	 * 处理显示会签意见的请求
+	 * 处理审批合同的Post请求
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -29,7 +28,7 @@ public class ShowHQOpinionServlet extends HttpServlet {
 
 		// 声明会话
 		HttpSession session = null;
-		// 获得会话
+		//  获得会话
 		session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
 
@@ -37,36 +36,54 @@ public class ShowHQOpinionServlet extends HttpServlet {
 		if (userId == null) {
 			response.sendRedirect("toLogin");
 		} else {
+
 			//  获得合同ID
 			int conId = Integer.parseInt(request.getParameter("conId"));
+			// 获得意见
+			String content = request.getParameter("content");
+			// 获得审批操作
+			String approve = request.getParameter("approve");
+
+			// 实例化 conProcess 来封装审批信息
+			ConProcess conProcess = new ConProcess();
+			conProcess.setConId(conId);
+			conProcess.setUserId(userId);
+			conProcess.setContent(content);
 			
+			// 根据审批意见设置状态值
+			if (approve.equals("true")) { // Approve type is "pass"
+				// 设置"PROCESS_APPROVE"类根据状态信息"DONE"
+				conProcess.setState(Constant.DONE);
+			} else { //  Approve type is "refuse"
+				// 设置"PROCESS_APPROVE" 类根据状态信息"VETOED"
+				conProcess.setState(Constant.VETOED);
+			}
+
+			/*
+			 * 调用逻辑层来处理
+			 */
 			try {
-				// 初始化合同服务对象
+				//  初始化contractService
 				ContractService contractService = new ContractService();
-				// 初始化csOpinionList
-				List<CSignatureOpinion> csOpinionList = new ArrayList<CSignatureOpinion>();
-				// 调用逻辑层来获得会签意见
-				csOpinionList = contractService.showHQOpinion(conId);
-				// 保存会签意见到请求
-				request.setAttribute("csOpinionList", csOpinionList);
-				// Forward 到会签意见界面
-				request.getRequestDispatcher("/showHQOpinion.jsp").forward(request,
-						response);
+				//调用逻辑层来审批合同
+				contractService.approve(conProcess);
+
+				// 审批合同后，重定向到待审批合同页面
+				response.sendRedirect("toDshphtList");
 			} catch (AppException e) {
 				e.printStackTrace();
-				// 重定向跳转到异常页面
+				// 重定向到异常页面
 				response.sendRedirect("toError");
 			}
 		}
 	}
 
 	/**
-	 * 处理GET请求
+	 *处理GET请求
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 调用doPost方法来处理请求
+		// 调用doPost()方法来处理请求
 		this.doPost(request, response);
 	}
-
 }

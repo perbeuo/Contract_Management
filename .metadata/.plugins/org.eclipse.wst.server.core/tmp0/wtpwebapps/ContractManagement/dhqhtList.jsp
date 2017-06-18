@@ -23,7 +23,7 @@
 		<div class="search">
 			<form>
 				查询待会签合同:
-				<input value="Enter search conditions.." />
+				<input value="" />
 				&nbsp;&nbsp;
 				<input type="submit" value="Search" class="search-submit"/> <br />
 			</form>

@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Process user's request,output new user page
+ * 处理用户请求,输出新用户页面
  */
 public class ToNewUserServlet extends HttpServlet {
 
 	/**
-	 * Process the POST requests,output new user page
+	 * 处理POST请求,输出新用户页面
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//Call doGet() to process request
+		// 设定编码方式
 		request.setCharacterEncoding("UTF-8");
 		
 		// 声明会话
 		HttpSession session = null;
-		// 获得会话 object
+		// 获得会话
 		session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
@@ -32,13 +32,13 @@ public class ToNewUserServlet extends HttpServlet {
 		if (userId == null) {
 			response.sendRedirect("toLogin");
 		}else {
-			// Forward to new user page
+			// Forward到新用户页面
 			request.getRequestDispatcher("/newUser.jsp").forward(request, response);
 		}
 	}
 
 	/**
-	 * 处理GET请求,output new user page
+	 * 处理GET请求,输出新用户页面
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

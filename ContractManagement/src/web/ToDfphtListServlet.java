@@ -15,12 +15,12 @@ import service.ContractService;
 import utils.AppException;
 
 /**
- * Servlet for accessing page of contract to be distributed 
+ * 进入待分配合同页面的Servlet 
  */
 public class ToDfphtListServlet extends HttpServlet{
 
 	/**
-	 * Jump to page of contract to be distributed 
+	 * 跳转到待分配合同页面
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {	
@@ -41,13 +41,13 @@ public class ToDfphtListServlet extends HttpServlet{
 			try {
 				// 初始化合同服务对象
 				ContractService contractService = new ContractService();
-				// Initialize contractList
+				// 初始化 contractList
 				List<ConBusiModel> contractList = new ArrayList<ConBusiModel>();  
-				// 调用逻辑层来 get list of contract to be distributed 
+				// 调用逻辑层来获得待分配合同列表
 				contractList = contractService.getDfphtList();
-				// Save contractList to request
+				// 保存contractList到request
 				request.setAttribute("contractList", contractList);
-				// Forward to contract to be distributed page
+				// Forward到待分配合同页面
 				request.getRequestDispatcher("/dfphtList.jsp").forward(request, response);
 			} catch (AppException e) {
 				e.printStackTrace();

@@ -15,12 +15,12 @@ import service.ContractService;
 import utils.AppException;
 
 /**
- * Access page of contract to be countersigned
+ * 进入待会签合同页面
  */
 public class ToDhqhtListServlet extends HttpServlet{
 
 	/**
-	 * Jump to page of contract to be countersigned
+	 * 跳转到待会签合同页面
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {	
@@ -41,13 +41,13 @@ public class ToDhqhtListServlet extends HttpServlet{
 			try {
 				// 初始化合同服务对象
 				ContractService contractService = new ContractService();
-				// Initialize contractList
+				// 初始化contractList
 				List<ConBusiModel> contractList = new ArrayList<ConBusiModel>();
-				// 调用逻辑层来 get list of contract to be countersigned 
+				// 调用逻辑层来 获得待会签合同列表
 				contractList = contractService.getDhqhtList(userId);
-				// Save contractList to request
+				// 保存 contractList到 request
 				request.setAttribute("contractList", contractList);
-				// Forward to page of contract to be countersigned
+				// Forward 到待会签合同页面
 				request.getRequestDispatcher("/dhqhtList.jsp").forward(request, response);
 			} catch (AppException e) {
 				e.printStackTrace();

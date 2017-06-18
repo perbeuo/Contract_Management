@@ -13,12 +13,12 @@ import service.ContractService;
 import utils.AppException;
 
 /**
- * Access finalized contract page
+ * 进入定稿合同页面
  */
 public class ToDgContractServlet extends HttpServlet{
 
 	/**
-	 * Jump to finalized contract page
+	 * 跳转到定稿合同页面
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {	
@@ -40,14 +40,14 @@ public class ToDgContractServlet extends HttpServlet{
 			int conId = Integer.parseInt(request.getParameter("conId"));
 
 			try {
-				// Initialize  contractService
+				// 初始化contractService
 				ContractService contractService = new ContractService();
-				//Query contract information according to Contract id
+				//根据合同ID查询合同信息
 				Contract contract = contractService.getContract(conId);
 
 				// 将合同传递到request
 				request.setAttribute("contract", contract);
-				// Forward to page of contract to be finalized 
+				// Forward到定稿合同页面
 				request.getRequestDispatcher("/dgContract.jsp").forward(
 						request, response);
 			} catch (AppException e) {

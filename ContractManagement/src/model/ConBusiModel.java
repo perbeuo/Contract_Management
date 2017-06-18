@@ -10,6 +10,7 @@ public class ConBusiModel {
 	private int conId; 			//Contract id
 	private String conName; 	//Contract name
 	private Date drafTime;		//Draft time
+	private Date finalTime;		//∂®∏Â ±º‰
 	
 	/**
 	 * No-arg constructor assigns initial values to object attributes
@@ -18,6 +19,7 @@ public class ConBusiModel {
 		this.conId = 0;
 		this.conName = "";
 		this.drafTime = new Date();
+		this.finalTime = new Date();
 	}
 
 	/*
@@ -46,6 +48,14 @@ public class ConBusiModel {
 
 	public void setDrafTime(Date drafTime) {
 		this.drafTime = drafTime;
+	}
+	
+	public Date getFinalTime() {
+		return finalTime;
+	}
+
+	public void setFinalTime(Date finalTime) {
+		this.finalTime = finalTime;
 	}
 	
 }

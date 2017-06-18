@@ -73,16 +73,16 @@ public class DraftServlet extends HttpServlet {
 				
 				// 回到起草页面，显示信息
 				if (contractService.draft(contract)) {
-					message = "Drafting succeeded!";
+					message = "起草成功！";
 					// 传递message
 					request.setAttribute("contract", contract);
 				} else {
-					message = "Drafting failure!";
+					message = "起草失败！";
 				}
 				
 			} catch (ParseException e) {
 				e.printStackTrace();
-				message = "Contract data is required. Incorrect date format";
+				message = "需要正确的日期信息！";
 			} catch (AppException e) {
 				e.printStackTrace();
 				//重定向跳转到异常页面

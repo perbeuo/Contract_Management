@@ -317,7 +317,7 @@ public class ContractService {
 	 * @throws AppException
 	 */
 	public List<ConBusiModel> getDdghtList(int userId) throws AppException {
-		// Initialize conList
+		// 初始化 conList
 		List<ConBusiModel> conList = new ArrayList<ConBusiModel>();
 		// Initialize conIds,for saving id set of contracts that to be finalized
 		List<Integer> conIds = new ArrayList<Integer>();
@@ -373,10 +373,69 @@ public class ContractService {
 	}
 	
 	/**
+	 * 查询已定稿合同
+	 * 
+	 * @param userId User id
+	 * @return 该用户已定稿的合同
+	 * @throws AppException
+	 */
+	public List<ConBusiModel> getYdghtList(int userId) throws AppException {
+		// 初始化 conList
+		List<ConBusiModel> conList = new ArrayList<ConBusiModel>();
+		// 初始化conIds,保存已定稿合同的ID
+		List<Integer> conIds = new ArrayList<Integer>();
+		
+		try {
+			/*
+			 * 1.Get id set of draft contracts
+			 */
+			List<Integer> drafConIds = contractDao.getIdsByUserId(userId);
+			
+			/*
+			 * 2.Screen out different id set of contracts to be finalized from drafted contracts,and save to conIds
+			 * Contracts to be finalized:exist "STATE_CSIGNED" state,do not exist "STATE_FINALIZED" state at the same time
+			 */
+			for (int dConId : drafConIds) {
+				if (conStateDao.isExist(dConId, Constant.STATE_FINALIZED)
+						&& !conStateDao.isExist(dConId,Constant.STATE_APPROVED)) {
+					conIds.add(dConId);
+				}
+			}
+			
+			/* 
+			 * 3.Get contract's information that to be finalized,and save to  contract business entity object,and put entity class to conList 
+			 */
+			for (int conId : conIds) {
+				// Get information of designated contract
+				Contract contract = contractDao.getById(conId);
+				// Get status of designated contract
+				ConState conState = conStateDao.getConState(conId, Constant.STATE_FINALIZED);
+				// Initialize conBusiModel
+				ConBusiModel conBusiModel = new ConBusiModel();
+				if (contract != null) {
+					// Set contract id and name to conBusiModel object
+					conBusiModel.setConId(contract.getId());
+					conBusiModel.setConName(contract.getName());
+				}
+				if (conState != null) {
+					// Set drafting time to conBusiModel object
+					conBusiModel.setFinalTime(conState.getTime()); 
+				}
+				conList.add(conBusiModel);
+			}
+		} catch (AppException e) {
+			e.printStackTrace();
+			throw new AppException("service.ContractService.getDdghtList");
+		}
+		// Return conList
+		return conList;
+	}
+	
+	/**
 	 * Finalize  contract 
 	 * 
 	 * @param contract Contract object
-	 * @return boolean Return true if operation successfully锛宱therwise return false 
+	 * @return boolean Return true if operation successfully, Otherwise return false 
 	 * @throws AppException
 	 */
 	public boolean finalize(Contract contract) throws AppException {
@@ -455,6 +514,125 @@ public class ContractService {
 	}
 	
 	/**
+	 * Query contract set that to be approved
+	 * 
+	 * @param userId User id
+	 * @return Query all contracts to be approved,otherwise return null
+	 * @throws AppException
+	 */
+	public List<ConBusiModel> getDshphtList(int userId) throws AppException {
+		// Initialize conList
+		List<ConBusiModel> conList = new ArrayList<ConBusiModel>();
+		// Initialize conList for saving id set of contract to be approved
+		List<Integer> conIds = new ArrayList<Integer>();
+		
+		ConProcess conProcess = new ConProcess();
+		// Set values to contract process object
+		conProcess.setUserId(userId);
+		// Set process's operation type to "PROCESS_APPROVE"
+		conProcess.setType(Constant.PROCESS_APPROVE);
+		// Set corresponding state of "PROCESS_APPROVE" type  is "UNDONE"
+		conProcess.setState(Constant.UNDONE);
+		
+		try {
+			/*
+			 * 1. 获得合同ID set that to be approved
+			 */
+			List<Integer> myConIds = conProcessDao.getConIds(conProcess);
+
+			/*
+			 * 2.Screen out id set of contract to be approved from distributed contract,and save to conIds
+			 * Contract to be approved: exist "STATE_FINALIZED" state in t_contract_state
+			 */
+			for (int conId : myConIds) {
+				if (conStateDao.isExist(conId, Constant.STATE_FINALIZED)) {
+					conIds.add(conId);
+				}
+			}
+			
+			/*
+			 * 3.Get approve conteact's information,and save to contract business entity object,and put entity class to conList
+			 */
+			for (int conId : conIds) {
+				// Get information of designated contract
+				Contract contract = contractDao.getById(conId);
+				// Get status of designated contract
+				ConState conState = conStateDao.getConState(conId, Constant.STATE_DRAFTED);
+				// Initialize conBusiModel object
+				ConBusiModel conBusiModel = new ConBusiModel();
+				if (contract != null) {
+					// Set contract id to conBusiModel object
+					conBusiModel.setConId(contract.getId());
+					conBusiModel.setConName(contract.getName());
+				}
+				if (conState != null) {
+					// Set draft time to conBusiModel object
+					conBusiModel.setDrafTime(conState.getTime());
+				}
+				conList.add(conBusiModel);
+			}
+		} catch (AppException e) {
+			e.printStackTrace();
+			throw new AppException(
+					"service.ContractService.getDshphtList");
+		}
+		// Return conList
+		return conList;
+	}
+	
+	/**
+	 * Approve contract,save approval information
+	 * 
+	 * @param conProcess Contract process object  
+	 * @return boolean Return true if operation successfully锛宱therwise return false 
+	 * @throws AppException
+	 */
+	public boolean approve(ConProcess conProcess) throws AppException {
+		boolean flag = false;// Define flag
+		
+		// Set process's operation type to "PROCESS_APPROVE"
+		conProcess.setType(Constant.PROCESS_APPROVE);
+		
+		try {
+			/*
+			 * First to do approve operation,then count all the number of persons to be approved and persons approved as "refuse",
+			 * if the number of persons to be approved is 0,and the number of persons approved as "refuse" is 0,
+			 * so all the approver have complete the approval and pass the approval,
+			 * and now set contract process state to "STATE_APPROVED"
+			 */
+			if (conProcessDao.update(conProcess)) { // To approve contract,enter approval information 
+				// Pass Parameter through conProcess to count number of approver,set state to "UNDONE"
+				conProcess.setState(Constant.UNDONE);
+				// Get total number of persons to be approved
+				int tbApprovedCount = conProcessDao.getTotalCount(conProcess);
+				
+				// Pass Parameter through conProcess to count number of refused approver,set state to "VETOED"
+				conProcess.setState(Constant.VETOED);
+				// Get total number of persons approved as "refuse"
+				int refusedCount = conProcessDao.getTotalCount(conProcess);
+
+				/*
+				 * If the number of persons to be approved is 0, then all the approver have been complete approval,
+				 * and all passed approval, so save contract state as "STATE_APPROVED"
+				 */
+				if (tbApprovedCount == 0 && refusedCount == 0) {
+					ConState conState = new ConState();
+					conState.setConId(conProcess.getConId());
+					// Set contract state type to "STATE_APPROVED"
+					conState.setType(Constant.STATE_APPROVED);
+					// Save contract state information
+					flag = conStateDao.add(conState);
+				}
+			}
+		} catch (AppException e) {
+			e.printStackTrace();
+			throw new AppException(
+					"service.ContractService.approve");
+		}
+		return flag;
+	}
+	
+	/**
 	 * Generated contract number, the rule is: year month day hour minute second+5 random numbers when drafting contract,
 	 * Will generate a unique number stored in the database, but the contract number is not the primary key in the table.
 	 */
@@ -474,4 +652,21 @@ public class ContractService {
 		return contractNum;
 	}
 
+	public static void main(String[] args) {
+		ContractService contractService = new ContractService();
+		List<ConBusiModel> contractList = new ArrayList<ConBusiModel>();
+		try {
+			contractList = contractService.getYdghtList(2);
+			for (ConBusiModel cbm : contractList) {
+				System.out.println("ID:" + cbm.getConId());
+				System.out.println("name:" + cbm.getConName());
+				System.out.println("finalize time:" + cbm.getFinalTime());
+			}
+			
+		} catch (AppException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
