@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import model.Right;
 import utils.AppException;
 
 /**
@@ -26,4 +27,33 @@ public interface RightDao {
 	 * @throws AppException
 	 */
 	public List<Integer> getUserIdsByRoleId(int roleId) throws AppException;
+	
+	/**
+	 * Get permission id according to user id
+	 * 
+	 * @param userId User id
+	 * @return id Permission id
+	 * @throws AppException
+	 */
+	public int getIdByUserId(int userId) throws AppException;
+	
+	/**
+	 * Update contract content according to permission id,
+	 * pass parameter though entity object
+	 * 
+	 * @param id permission id
+	 * @return boolean Return true if successful , otherwise false
+	 * @throws AppException
+	 */
+	public boolean updateById(Right right) throws AppException;
+	
+	/**
+	 * Save permission information
+	 * 
+	 * @param right permission object
+	 * @return Return true if successful , otherwise false
+	 * @throws AppException
+	 */
+	public boolean add(Right right) throws AppException;
+	
 }

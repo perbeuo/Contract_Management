@@ -16,9 +16,6 @@
 				<dd>
 					<a href="toDraft" target="main">起草合同</a>
 				</dd>
-				<dd>
-					<a href="#">查询进度</a>
-				</dd>
 			</dl>
 			<dl>
 				<dt>
@@ -28,7 +25,7 @@
 					<a href="toDhqhtList" target="main">会签合同</a>
 				</dd>
 				<dd>
-					<a href="#">已会签合同 </a>
+					<a href="toYhqhtList" target="main">已会签合同 </a>
 				</dd>
 			</dl>
 			<dl>
@@ -50,7 +47,7 @@
 					<a href="toDshphtList" target="main">审批合同</a>
 				</dd>
 				<dd>
-					<a href="#">已审批合同</a>
+					<a href="toYshphtList" target="main">已审批合同</a>
 				</dd>
 			</dl>
 			<dl>
@@ -58,10 +55,10 @@
 					签订
 				</dt>
 				<dd>
-					<a href="#">签订合同</a>
+					<a href="toDqdhtList" target="main">签订合同</a>
 				</dd>
 				<dd>
-					<a href="#">已签订合同</a>
+					<a href="toYqdhtList" target="main">已签订合同</a>
 				</dd>
 			</dl>
 		</div>

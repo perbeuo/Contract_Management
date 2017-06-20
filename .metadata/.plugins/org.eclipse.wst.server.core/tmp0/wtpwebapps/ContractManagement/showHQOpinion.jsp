@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Display countersign opinion</title>
+		<title>显示会签意见</title>
 		<link href="css/style.css" rel="stylesheet" media="screen"
 			type="text/css" />
 	</head>

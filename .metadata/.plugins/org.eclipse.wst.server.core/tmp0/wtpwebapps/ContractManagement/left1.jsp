@@ -21,7 +21,7 @@
 				<a href="#">角色管理</a>
 			</dd>		
 			<dd>
-				<a href="#">日志管理</a>
+				<a href="toYhqxList" target="main">用户权限</a>
 			</dd>	
 		</dl>
 		<dl>

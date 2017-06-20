@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import dao.RoleDao;
 import model.Role;
@@ -62,6 +64,54 @@ public class RoleDaoImpl implements RoleDao {
 			DBUtil.closeConnection(conn);
 		}
 		return role;
+	}
+	
+	/**
+	 * Query all role object set
+	 * 
+	 * @return Role object set
+	 * @throws AppException
+	 */
+	public List<Role> getAll() throws AppException {
+		// Initialiaze roleList
+		List<Role> roleList = new ArrayList<Role>();
+		
+		//Declare Connection object,PreparedStatement object and ResultSet object
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		try {
+			// Create database connection
+			conn = DBUtil.getConnection();
+			// Declare operation statement:query all role object set,"?" is a placeholder
+			String sql = "select id,name,description,function_ids from t_role where del = 0";
+			
+			psmt = conn.prepareStatement(sql);
+			
+			rs = psmt.executeQuery();// Return result set
+			// Loop to get information in result set,and save in ids
+			while (rs.next()) {
+				Role role = new Role(); // Instantiate role object
+				// Set value to role
+				role.setId(rs.getInt("id"));
+				role.setName(rs.getString("name"));
+				role.setDescription(rs.getString("description"));
+				role.setFuncIds(rs.getString("function_ids"));
+				
+				roleList.add(role);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(
+					"dao.impl.RoleDaoImpl.getAll");
+		} finally {
+			// Close the database operation object, release resources
+			DBUtil.closeResultSet(rs);
+			DBUtil.closeStatement(psmt);
+			DBUtil.closeConnection(conn);
+		}
+		return roleList;
 	}
 
 }

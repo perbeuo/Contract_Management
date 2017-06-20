@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import model.User;
 import utils.AppException;
 
@@ -44,4 +46,12 @@ public interface UserDao {
 	 * @throws AppException
 	 */
 	public User getById(int id) throws AppException;
+	
+	/**
+	 * Query user id set
+	 * 
+	 * @return User id set
+	 * @throws AppException
+	 */
+	public List<Integer> getIds() throws AppException;
 }

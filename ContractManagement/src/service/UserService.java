@@ -3,10 +3,13 @@ package service;
 import java.util.ArrayList;
 import java.util.List;
 import model.User;
+import model.PermissionBusiModel;
 import model.Role;
+import model.Right;
 import utils.AppException;
 import dao.*;
 import dao.impl.*;
+
 
 /**
  * User business logic class
@@ -143,5 +146,123 @@ public class UserService {
 		}	
 		// Return userList
 		return userList;
+	}
+	
+	/**
+	 * Get user permission list
+	 * 
+	 * @return permissionList  User permission list
+	 * @throws AppException
+	 */
+	public List<PermissionBusiModel> getYhqxList() throws AppException {
+		// Initialize permissionList
+		List<PermissionBusiModel> permissionList = new ArrayList<PermissionBusiModel>();
+		// Declare userIds
+		List<Integer> userIds = null; 
+		
+		try {
+			/*
+			 * 1.Get user id set
+			 */
+			userIds = userDao.getIds();
+			
+			/*
+			 * 2.Get user permission information: user information and corresponding role information
+			 */
+			for (int userId : userIds) {
+			
+				// Initialize business entity class object
+				PermissionBusiModel permission = new PermissionBusiModel();
+				
+				User user = userDao.getById(userId); // Get user information according to user id
+				int roleId = -1;
+				roleId = rightDao.getRoleIdByUserId(userId); // Get role id according to user id
+				
+				if (roleId > 0) {
+					Role role = roleDao.getById(roleId); // Get role information according to role id
+					// Save role information to permission
+					permission.setRoleId(roleId);
+					permission.setRoleName(role.getName());
+				}
+				
+				// Save user information to permission
+				permission.setUserId(userId);
+				permission.setUserName(user.getName());
+				
+				permissionList.add(permission);
+			}
+			
+		} catch (AppException e) {
+			e.printStackTrace();
+			throw new AppException("service.UserService.getYhqxList");
+		}	
+		// Permission business entity set
+		return permissionList;
+	}
+	
+	/**
+	 * Get role list
+	 * 
+	 * @return Role object set
+	 * @throws AppException
+	 */
+	public List<Role> getRoleList() throws AppException {	
+		// Initialize role set
+		List<Role> roleList = new ArrayList<Role>();
+		
+		try {
+			// Get all role object set
+			roleList = roleDao.getAll();
+			
+		} catch (AppException e) {
+			e.printStackTrace();
+			throw new AppException("service.UserService.getRoleList");
+		}
+		return roleList;
+	}
+	
+	/**
+	 * Configure permission
+	 *  
+	 * @param right Permission object
+	 * @return boolean Return true if operation successful,otherwise return false
+	 * @throws AppException
+	 */
+	public boolean assignPermission(Right right) throws AppException {
+		boolean flag = false;// Define flag
+		
+		try {
+			//  Get user's role 
+			int roleId = -1; // Initialize roleId
+			// Get user's role id
+			roleId = rightDao.getRoleIdByUserId(right.getUserId());
+			// Declare role object
+			Role role = null;
+			if (roleId > 0) {
+				// Get role information
+				role = roleDao.getById(roleId);
+			}
+		
+			/*
+			 * Judgement role of user owned before,if user has a role before,so change the role,otherwise add a new role
+			 */
+			if (role != null) {
+				// Get user's permission
+				int rightId = rightDao.getIdByUserId(right.getUserId());
+				// Set permission id to right object
+				right.setId(rightId);
+				right.setDescription("update");
+				// Update permission information
+				flag = rightDao.updateById(right);
+			} else {
+				flag = rightDao.add(right);
+			}
+			
+		} catch (AppException e) {
+			e.printStackTrace();
+			throw new AppException(
+					"service.UserService.assignPermission");
+		}
+		return flag;
 	}
 }

@@ -307,4 +307,125 @@
 		<url-pattern>/addSHPOpinion</url-pattern>
 	</servlet-mapping>
 	
+	<!-- Configure the access of ToDqdhtListServlet -->
+	<servlet>
+		<servlet-name>toDqdhtList</servlet-name>
+		<servlet-class>web.ToDqdhtListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toDqdhtList</servlet-name>
+		<url-pattern>/toDqdhtList</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ToAddQDInfoServlet -->
+	<servlet>
+		<servlet-name>toAddQDInfo</servlet-name>
+		<servlet-class>web.ToAddQDInfoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toAddQDInfo</servlet-name>
+		<url-pattern>/toAddQDInfo</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of AddQDInfoServlet -->
+	<servlet>
+		<servlet-name>addQDInfo</servlet-name>
+		<servlet-class>web.AddQDInfoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>addQDInfo</servlet-name>
+		<url-pattern>/addQDInfo</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ToYhqxListServlet -->
+	<servlet>
+		<servlet-name>toYhqxList</servlet-name>
+		<servlet-class>web.ToYhqxListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toYhqxList</servlet-name>
+		<url-pattern>/toYhqxList</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ToAssignPermServlet -->
+	<servlet>
+		<servlet-name>toAssignPerm</servlet-name>
+		<servlet-class>web.ToAssignPermServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toAssignPerm</servlet-name>
+		<url-pattern>/toAssignPerm</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of AssignPermServlet -->
+	<servlet>
+		<servlet-name>assignPerm</servlet-name>
+		<servlet-class>web.AssignPermServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>assignPerm</servlet-name>
+		<url-pattern>/assignPerm</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ShowBADSHPOpinionServlet -->
+	<servlet>
+		<servlet-name>showBADSHPOpinion</servlet-name>
+		<servlet-class>web.ShowBADSHPOpinionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showBADSHPOpinion</servlet-name>
+		<url-pattern>/showBADSHPOpinion</url-pattern>
+	</servlet-mapping>
+	
+		<!-- Configure the access of ShowGOODSHPOpinionServlet -->
+	<servlet>
+		<servlet-name>showGOODSHPOpinion</servlet-name>
+		<servlet-class>web.ShowGOODSHPOpinionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showGOODSHPOpinion</servlet-name>
+		<url-pattern>/showGOODSHPOpinion</url-pattern>
+	</servlet-mapping>
+	
+		<!-- Configure the access of ToYhqhtListServlet -->
+	<servlet>
+		<servlet-name>toYhqhtList</servlet-name>
+		<servlet-class>web.ToYhqhtListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toYhqhtList</servlet-name>
+		<url-pattern>/toYhqhtList</url-pattern>
+	</servlet-mapping>
+	
+		<!-- Configure the access of ToYshphtListServlet -->
+	<servlet>
+		<servlet-name>toYshphtList</servlet-name>
+		<servlet-class>web.ToYshphtListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toYshphtList</servlet-name>
+		<url-pattern>/toYshphtList</url-pattern>
+	</servlet-mapping>
+	
+		<!-- Configure the access of ToYqdhtListServlet -->
+	<servlet>
+		<servlet-name>toYqdhtList</servlet-name>
+		<servlet-class>web.ToYqdhtListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>toYqdhtList</servlet-name>
+		<url-pattern>/toYqdhtList</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Configure the access of ShowQDOpinionServlet -->
+	<servlet>
+		<servlet-name>showQDOpinion</servlet-name>
+		<servlet-class>web.ShowQDOpinionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showQDOpinion</servlet-name>
+		<url-pattern>/showQDOpinion</url-pattern>
+	</servlet-mapping>
+	
+		
 </web-app>

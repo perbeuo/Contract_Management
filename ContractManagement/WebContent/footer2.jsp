@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Contract Management System - Footer</title>
+		<title>合同管理系统 - 页脚</title>
 		<link href="css/frame.css" rel="stylesheet" type="text/css" />
 	</head>
 
@@ -11,19 +11,19 @@
 		<div class="footer">
 			<ul>
 				<li>
-					<a target="_blank" href="#">合同管理系统</a>
+					合同管理系统
 				</li>
 				<li>
 					｜
 				</li>
 				<li>
-					<a target="_blank" href="#">帮助</a>
+					<a target="_blank" href="info.jsp">信息</a>
 				</li>
 			</ul>
 
 			<p>
 				Copyright&nbsp;&copy;OAO&nbsp;
-				<strong>学渣小组</strong>
+				<strong>学渣小组-何方溥 关宸</strong>
 				&nbsp;Copyright Reserved
 			</p>
 		</div>

@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Contract Management System - New User</title>
+		<title>合同管理系统 - 新用户</title>
 		<link href="css/frame.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
@@ -14,7 +14,7 @@
 					String name = (String) session.getAttribute("userName");
 				%>
 				<span>您好:<%=name%>,欢迎来到数据库管理系统!
-					[<a href="logout" target="_top">Logout</a>]</span>
+					[<a href="logout" target="_top">退出</a>]</span>
 			</div>
 			<h1>
 				<img src="images/logo_title.png" alt="Contract Management System" />

@@ -58,7 +58,11 @@
 						<img src="images/information.png"  alt="Countersign opinion" />
 						会签意见
 					</a> 
-					&nbsp;
+					&nbsp;|&nbsp;
+					<a href="showSHPOpinion?conId=<%=cbm.getConId()%>">
+						<img src="images/information.png"  alt="Approve opinion" />
+						审批意见
+					</a>
 				</td>
 			</tr>
 			<%} %>

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import dao.UserDao;
 import model.User;
@@ -180,5 +182,46 @@ public class UserDaoImpl implements UserDao {
 			DBUtil.closeConnection(conn);
 		}
 		return user;
+	}
+	
+	/**
+	 * Query user id set
+	 * 
+	 * @return User id set
+	 * @throws AppException
+	 */
+	public List<Integer> getIds() throws AppException {
+		// Initialiaze ids
+		List<Integer> ids = new ArrayList<Integer>();
+		
+		//Declare Connection object,PreparedStatement object and ResultSet object
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		try {
+			// Create database connection
+			conn = DBUtil.getConnection();
+			// Declare operation statement:query user id set,"?" is a placeholder
+			String sql = "select id from t_user where del = 0";
+			
+			psmt = conn.prepareStatement(sql);
+			
+			rs = psmt.executeQuery();// Return result set
+			// Loop to get information in result set,and save in ids
+			while (rs.next()) {
+				ids.add(rs.getInt("id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException(
+					"dao.impl.UserDaoImpl.getIds");
+		} finally {
+			// Close database operation object, release resources
+			DBUtil.closeResultSet(rs);
+			DBUtil.closeStatement(psmt);
+			DBUtil.closeConnection(conn);
+		}
+		return ids;
 	}
 }
